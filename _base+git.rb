@@ -3,14 +3,11 @@ run "echo TODO > README"
 git :init
 run "find . -type d -empty | while read dir ; do touch $dir/.gitkeep ; done"
 if File.exist?('.gitignore')
-  puts "Appending to .gitignore"
-  File.open('.gitignore', 'a') do |f|
-    f.puts <<-EOF
+  append_file ".gitignore", <<-END
 db/schema.rb
 .idea
 !.gitignore
-    EOF
-  end
+    END
 else
   file ".gitignore", <<-END
 .DS_Store
