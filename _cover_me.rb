@@ -6,6 +6,10 @@ require 'rspec/rails'
 require 'cover_me'
 END
 
+run 'bundle install'
+
+generate :'cover_me:install'
+
 append_file 'spec/spec_helper.rb', <<-'END'
 
 CoverMe.config do |config|
@@ -28,25 +32,6 @@ CoverMe.config do |config|
     end
   }
 end
-END
-
-create_file 'lib/tasks/cover_me.rake', <<-END
-  namespace :cover_me do
-  
-    task :report do
-      require 'cover_me'
-      CoverMe.complete!
-    end
-  
-  end
-
-  task :test do
-    Rake::Task['cover_me:report'].invoke
-  end
-
-  task :spec do
-    Rake::Task['cover_me:report'].invoke
-  end
 END
 
 git :add => "."
