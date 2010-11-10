@@ -3,4 +3,4 @@ Rails Templates
 
 To use:
 
-  rails new <appnamme> --template=http://github.com/sampierson/rails-templates/raw/master/<template>.rb
+  rails new <appnamme> --template=https://github.com/sampierson/rails-templates/raw/master/<template>.rb
