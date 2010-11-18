@@ -1,4 +1,4 @@
-gem 'cover_me', '>= 1.0.0.rc1'
+gem 'cover_me'
 run 'bundle install'
 
 gsub_file 'spec/spec_helper.rb', /require 'rspec\/rails\n'/, <<-END
