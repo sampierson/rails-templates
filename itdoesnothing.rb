@@ -1,24 +1,14 @@
-run "echo TODO > README"
+TEMPLATES_REPOSITORY = 'https://github.com/sampierson/rails-templates/raw/master'
 
-git :init
-run "find . -type d -empty | while read dir ; do touch $dir/.gitignore ; done"
-file ".gitignore", <<-END
-.DS_Store
-log/*.log
-tmp/**/*
-db/*.sqlite3
-.idea
-!.gitignore
-END
-
-git :add => "."
-git :commit => "-m 'virgin Rails application'"
-
-generate :rspec
-git :add => "."
-git :commit => "-m 'script/generate rspec'"
-
-gem 'haml', :version => '>= 2.2.15'
-run "haml --rails ."
-git :add => "."
-git :commit => "-m 'Added HAML support'"
+%w{
+  base+git
+  rspec2
+  cover_me
+  cucumber+capybara
+  haml
+  haml_layout
+  home_controller
+  devise
+}.each do |template|
+  apply "#{TEMPLATES_REPOSITORY}/_#{template}.rb"
+end

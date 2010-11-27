@@ -1,17 +1,16 @@
-gem 'cover_me'
-run 'bundle install'
+git_commit("bundle cover_me gem") do
+  gem 'cover_me', :group => [:development, :test]
+  bundle_install  
+end
 
-gsub_file 'spec/spec_helper.rb', /require 'rspec\/rails\n'/, <<-END
-require 'rspec/rails'
-require 'cover_me'
-END
+git_commit "rails generate cover_me:install\n\nand configure cover_me in cover_me.rake" do
 
-run 'bundle install'
+  bundle_install
 
-generate :'cover_me:install'
+  generate :'cover_me:install'
 
-append_file 'spec/spec_helper.rb', <<-'END'
-
+  insert_into_file('lib/tasks/cover_me.rake', :before => "task :test do\n") do
+    <<-'END'
 CoverMe.config do |config|
   # where is your project's root:
   # c.project.root => "Rails.root" (default)
@@ -24,15 +23,20 @@ CoverMe.config do |config|
 
   # what do you want to happen when it finishes:
   config.at_exit = Proc.new {
-    if CoverMe.config.formatter == CoverMe::HtmlFormatter
-      index = File.join(CoverMe.config.html_formatter.output_path, 'index.html')
-      if File.exists?(index)
-        `open #{index}`
-      end
-    end
+  #   if CoverMe.config.formatter == CoverMe::HtmlFormatter
+  #     index = File.join(CoverMe.config.html_formatter.output_path, 'index.html')
+  #     if File.exists?(index)
+  #       `open #{index}`
+  #     end
+  #   end
   }
 end
-END
 
-git :add => "."
-git :commit => "-m 'add cover_me support'"
+    END
+  end
+
+  append_file '.gitignore', <<-'END'
+/coverage.data
+/coverage
+  END
+end

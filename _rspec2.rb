@@ -1,8 +1,8 @@
-gem "rspec-rails", :group => [:development, :test]
-run 'bundle install'
-git :add => "."
-git :commit => "-m 'bundle RSpec2'"
+git_commit('bundle RSpec2') do
+  gem "rspec-rails", :group => [:development, :test]
+  bundle_install
+end
 
-generate :'rspec:install'
-git :add => "."
-git :commit => "-m 'rails generate rspec:install'"
+git_commit('rails generate rspec:install') do
+  generate :'rspec:install'
+end
