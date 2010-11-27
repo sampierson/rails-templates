@@ -3,9 +3,18 @@ def git_commit(message, &block)
   git :add => "."
   git :commit => "--quiet -m '#{message}'"
 end
-
+  
 def bundle_install
-  run 'bundle install --quiet'
+  run 'bundle install --local --quiet'
+end
+
+# Copy (if we are using a local repository) or get (if we are using a remote repository) template file
+def install_template(path)
+  if TEMPLATES_REPOSITORY =~ /^https?:/
+    get "#{TEMPLATES_REPOSITORY}/file_templates/#{path}", path
+  else
+    template "#{TEMPLATES_REPOSITORY}/file_templates/#{path}", path
+  end
 end
 
 git_commit "Virgin Rails #{Rails::VERSION::STRING} application" do
