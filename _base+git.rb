@@ -5,11 +5,12 @@ def git_commit(message, &block)
 end
   
 def bundle_install
-  run 'bundle install --local --quiet'
+  run 'bundle install --quiet'
 end
 
 # Copy (if we are using a local repository) or get (if we are using a remote repository) template file
 def install_template(path)
+  puts "  installing  #{path}"
   if TEMPLATES_REPOSITORY =~ /^https?:/
     get "#{TEMPLATES_REPOSITORY}/file_templates/#{path}", path
   else
