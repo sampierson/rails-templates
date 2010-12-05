@@ -1,3 +1,9 @@
+#
+# Create your application with:
+#
+#   rails new <name> --skip-test-unit --skip-prototype --template=https://girhub.com/sampierson/rails-templates/raw/master/itdoesnothing.rb
+#
+
 TEMPLATES_REPOSITORY = 'https://github.com/sampierson/rails-templates/raw/master'
 
 %w{
@@ -9,6 +15,7 @@ TEMPLATES_REPOSITORY = 'https://github.com/sampierson/rails-templates/raw/master
   haml_layout
   home_controller
   devise
+  jquery
 }.each do |template|
   apply "#{TEMPLATES_REPOSITORY}/_#{template}.rb"
 end
