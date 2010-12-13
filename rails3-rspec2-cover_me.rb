@@ -5,11 +5,11 @@
 #
 # For Ruby 1.9 (cover_me is code coverage tool for Ruby 1.9)
 #
-apply 'https://github.com/sampierson/rails-templates/raw/master/_base+git.rb'
+apply "#{TEMPLATES_REPOSITORY}/_base+git.rb"
 if defined?(JRUBY_VERSION)
   apply 'http://jruby.org/rails3.rb'
   git :add => '.'
   git :commit => "-m 'JRuby database support'"
 end
-apply 'https://github.com/sampierson/rails-templates/raw/master/_rspec2.rb'
-apply 'https://github.com/sampierson/rails-templates/raw/master/_cover_me.rb'
+apply "#{TEMPLATES_REPOSITORY}/_rspec2.rb"
+apply "#{TEMPLATES_REPOSITORY}/_cover_me.rb"

@@ -3,11 +3,11 @@
 #   RSpec2
 #   cucumber
 #
-apply 'https://github.com/sampierson/rails-templates/raw/master/_base+git.rb'
+apply "#{TEMPLATES_REPOSITORY}/_base+git.rb"
 if defined?(JRUBY_VERSION)
   apply 'http://jruby.org/rails3.rb'
   git :add => '.'
   git :commit => "-m 'JRuby database support'"
 end
-apply 'https://github.com/sampierson/rails-templates/raw/master/_rspec2.rb'
-apply '/Users/sam/Development/SamPierson/rails-templates/_cucumber+webrat.rb'
+apply "#{TEMPLATES_REPOSITORY}/_rspec2.rb"
+apply "#{TEMPLATES_REPOSITORY}/_cucumber+webrat.rb"
