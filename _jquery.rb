@@ -13,15 +13,17 @@ git_commit("Install jQuery") do
   get "http://code.jquery.com/jquery-#{@jquery_version}.min.js", "public/javascripts/jquery-#{@jquery_version}.min.js"
 end
 
-git_commit("Install jquery-ujs as a submodule") do
-  git(:submodule => 'add git://github.com/rails/jquery-ujs.git public/javascripts/jquery-ujs')
+git_commit("Install rails.js UJS") do
+  # Be Heroku-friendly - don't use submodules
+  # git(:submodule => 'add git://github.com/rails/jquery-ujs.git public/javascripts/jquery-ujs')
+  get "https://github.com/rails/jquery-ujs/raw/master/src/rails.js", "public/javascripts/rails.js"
 end
 
 git_commit("Configure javascript_include_tag") do
   inject_into_file 'config/environments/development.rb', :before => /^end\n/ do
-    "\n  config.action_view.javascript_expansions[:defaults] = ['jquery-1.4.4', 'jquery-ujs/src/rails']\n"
+    "\n  config.action_view.javascript_expansions[:defaults] = ['jquery-1.4.4', 'rails']\n"
   end
   inject_into_file 'config/environments/production.rb', :before => /^end\n/ do
-    "\n  config.action_view.javascript_expansions[:defaults] = ['jquery-1.4.4.min', 'jquery-ujs/src/rails']\n"
+    "\n  config.action_view.javascript_expansions[:defaults] = ['jquery-1.4.4.min', 'rails']\n"
   end
 end
