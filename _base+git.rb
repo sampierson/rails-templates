@@ -23,3 +23,9 @@ db/schema.rb
     END
   end
 end
+
+if defined?(JRUBY_VERSION)
+  git_commit 'JRuby database support' do
+    apply 'http://jruby.org/rails3.rb'
+  end
+end
