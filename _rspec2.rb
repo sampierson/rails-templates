@@ -6,3 +6,8 @@ end
 git_commit('rails generate rspec:install') do
   generate :'rspec:install'
 end
+
+git_commit('create spec folders') do
+  Dir.mkdir('spec/models')
+  Dir.mkdir('spec/controllers')
+end
