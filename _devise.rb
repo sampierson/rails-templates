@@ -31,11 +31,13 @@ git_commit('devise links in layout') do
     EOF
   end
 
-  append_file 'app/stylesheets/application.sass', <<-EOF
+  if File.exist?('app/stylesheets/application.sass')
+    append_file 'app/stylesheets/application.sass', <<-EOF
 
 #user_nav
   float: right
   font-size: 12px
-  EOF
+    EOF
+  end
 end
 
