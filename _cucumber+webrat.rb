@@ -1,16 +1,16 @@
-gem "cucumber-rails", :group => [:development, :test]
-gem "nokogiri", :group => [:development, :test]
-gem "webrat", :group => [:development, :test]
-run 'bundle install'
-git :add => "."
-git :commit => "-m 'bundle cucumber, webrat gems'"
+git_commit("bundle cucumber, webrat gems") do
+  gem "cucumber-rails", :group => [:development, :test]
+  gem "nokogiri", :group => [:development, :test]
+  gem "webrat", :group => [:development, :test]
+  bundle_install
+end
 
-generate :'cucumber:install', '--rspec', '--webrat'
-git :add => "."
-git :commit => "-m 'rails generate cucumber:install --rspec --webrat'"
+git_commit "rails generate cucumber:install --rspec --webrat" do
+  generate :'cucumber:install', '--rspec', '--webrat'
+end
 
-gsub_file 'features/support/env.rb', /config.mode = :rails/, <<-END
+git_commit 'Change webrat run mode to :rack for Rails3 compatibility' do
+  gsub_file 'features/support/env.rb', /config.mode = :rails/, <<-END
   config.mode = :rack
-END
-git :add => "."
-git :commit => "-m 'Change webrat run mode to :rack for Rails3 compatibility'"
+  END
+end
