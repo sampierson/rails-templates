@@ -1,0 +1,82 @@
+@import "compass/css3";
+
+//-----------------------------------------------
+// The following html5-boilerplate styles should
+// probably be customized for each site
+//-----------------------------------------------
+
+h1, h2, h3, h4, h5, h6 {
+  // Bold might not be the best choice if you are
+  // embedding font faces that are already bold
+  font-weight: bold;
+}
+
+strong, th {
+  font-weight: bold;
+}
+
+small {
+  // Use font-size mixin to convert to percentage for YUI
+  // http://developer.yahoo.com/yui/3/cssfonts/#fontsize
+  @include font-size(11px);  // approx 85% when base-font-size eq 13px
+}
+
+// Add the 'required' attribute on your
+// inputs if you want to use these
+input:valid, textarea:valid {}
+input:invalid, textarea:invalid {
+  @include border-radius(1px);
+  @include box-shadow(red, 0, 0, 5px, 0);
+}
+.no-boxshadow input:invalid,
+.no-boxshadow textarea:invalid { background-color: #f0dddd; }
+
+
+//-----------------------------------
+// Add your own custom styles below
+//-----------------------------------
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+
+  font-family: Verdana, Helvetica, Arial;
+  font-size: 14px;
+}
+
+#container {
+  min-height: 100%;
+}
+
+header {
+  height: 40px;
+  padding: 20px;
+
+  background-color: #E0E0E0;
+
+  #logo {
+    font-weight: bold;
+    font-size: 2.5em;
+  }
+
+  #user_nav {
+    float: right;
+  }
+}
+
+#main {
+  padding: 20px;
+}
+
+footer {
+  height: 20px;
+  padding: 5px;
+  margin-top: -30px;
+
+  background-color: #E0E0E0;
+
+  text-align: center;
+}
