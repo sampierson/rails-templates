@@ -23,8 +23,14 @@ git_commit 'Configure devise initializer' do
 end
 
 git_commit 'Changes suggested by devise:install' do
-  inject_into_file 'config/environments/development.rb', :before => /^end\n/ do
-    "\n  config.action_mailer.default_url_options = { :host => 'localhost:3000' }\n"
+  [
+    { :environment => :development, :email_from_host => 'localhost:3000' },
+    { :environment => :test,        :email_from_host => 'localhost:3000' },
+    { :environment => :production,  :email_from_host => 'itdoesnothing.com' }
+  ].each do |info|
+    inject_into_file "config/environments/#{info[:environment]}.rb", :before => /^end\n/ do
+      "\n  config.action_mailer.default_url_options = { :host => '#{info[:email_from_host]}' }\n"
+    end
   end
 end
 
