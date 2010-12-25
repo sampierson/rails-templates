@@ -20,3 +20,7 @@ TEMPLATES = [
 ].each do |template|
   apply "#{TEMPLATES_REPOSITORY}/_#{template}.rb"
 end
+
+git_commit "Change logo to itdoesnothing" do
+  gsub_file 'app/views/layouts/_header.html.haml', 'Logo', "It Does Nothing!"
+end

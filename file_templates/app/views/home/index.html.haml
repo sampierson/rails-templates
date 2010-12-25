@@ -1,0 +1,36 @@
+%br
+  %h1.center It Does Nothing, but it does it Really Well
+%p
+  It Does Nothing is a set of Rails application templates that will create a functional Rails website that may then
+  be purposed for a specific application.  It includes:
+%br
+%ul
+  %li
+    Test frameworks
+    %ul
+      %li RSpec
+      %li Cover Me (code coverage)
+      %li Cucumber/capybara
+  %li
+    Compass with HTML5-Boilerplate
+  %li
+    Authentication using Devise including email confirmations (:confirmable).
+    - if Devise.mailer_sender == "please-change-me@config-initializers-devise.com"
+      %div{ :style => 'color: red' }
+        Please change Devise.mailer sender in config/initializers/devise.rb
+    - if Rails.application.config.action_mailer.default_url_options[:host] =~ /localhost/
+      %div{ :style => 'color: red' }
+        Please change action_mailer.default_url_options in config/environments/#{Rails.env}.rb
+%br
+Git is used to record every step in the construction of the application,
+so you can see exactly what was done at each step.
+%h2 Usage
+%h4 Rails >= 3.0.4
+%pre
+  rails new <application-name> --skip-test-unit --skip-prototype --template=https://github.com/sampierson/rails-templates/raw/master/itdoesnothing.rb
+%h4 Rails 3 < 3.0.4
+There is a bug in Rails versions < 3.0.4 that will not allow you to use https:// addresses for templates.
+So to use this template, just use curl to download it and run it from your local disk:
+%pre
+  curl -O https://github.com/sampierson/rails-templates/raw/master/itdoesnothing.rb
+  rails new <application-name> --skip-test-unit --skip-prototype --template=itdoesnothing.rb

@@ -3,8 +3,7 @@ git_commit('Created HomeController#index') do
 
   # generate --template-engine=haml does not work
   remove_file 'app/views/home/index.html.erb'
-  add_file 'app/views/home/index.html.haml', "This is HomeController#index\n"
-
+  install_template 'app/views/home/index.html.haml'
   create_file 'spec/controllers/home_controller_spec.rb', <<-EOF
 require 'spec_helper'
 
