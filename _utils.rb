@@ -17,7 +17,7 @@ def bundle_install
 end
 
 # Copy (if we are using a local repository) or get (if we are using a remote repository) template file
-def install_template(path, options)
+def install_template(path, options = {})
   src_path = "#{TEMPLATES_REPOSITORY}/file_templates/#{options[:flavor]}/#{path}"
   puts "  installing #{path}"
   method = TEMPLATES_REPOSITORY =~ /^https?:/ ? :get : :template
