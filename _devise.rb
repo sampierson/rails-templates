@@ -67,28 +67,45 @@ git_commit 'Turn on :confirmable and :lockable' do
 
 end
 
-git_commit 'Devise links in layout' do
+git_commit 'Add devise login/registration links to layout' do
+
   header_template = 'app/views/layouts/_header.html.haml'
   if File.exist? header_template # Assume we are using Compass HTML5-Boilerplate
     remove_file header_template
     install_template header_template
-    gsub_file 'app/stylesheets/partials/_page.scss', "header {}\n", <<-EOF1
+    gsub_file 'app/stylesheets/partials/_page.scss', "header {}\n", <<-EOF10
 header {
   #user_nav {
     float: right;
   }
 }
-    EOF1
-    append_file 'config/locales/devise.en.yml', <<-EOF2
-    links:
+    EOF10
+
+    gsub_file 'config/locales/devise.en.yml', "    sessions:\n", <<-EOF20
+    sessions:
+      login: Login
       sign_in: Sign in
+      signed_in: 'Signed in successfully.'
       sign_out: Sign out
-      sign_up: Sign up
       signed_in_as: Signed in as %{current_user.email}. Not you?
-    EOF2
+      signed_out: 'Signed out successfully.'
+    EOF20
+
+    gsub_file 'config/locales/devise.en.yml', "    passwords:\n", <<-EOF25
+    passwords:
+      forgot: Forgot your password?
+    EOF25
+
+    gsub_file 'config/locales/devise.en.yml', "    registrations:\n", <<-EOF25
+    registrations:
+      already_question: "Already have an account?"
+      dont_have_an_account: "Don't have an account?"
+      sign_up: Sign up
+    EOF25
+
   else
     inject_into_file 'app/views/layouts/application.html.haml', :after => "#container\n" do
-      <<-EOF3
+      <<-EOF30
       #user_nav
         - if user_signed_in?
           Signed in as \#{current_user.email}. Not you?
@@ -97,17 +114,30 @@ header {
           = link_to "Sign up", new_user_registration_path
           or
           = link_to "Sign in", new_user_session_path
-      EOF3
+      EOF30
     end
   end
 
   if File.exist? 'app/stylesheets/application.sass'
-    append_file 'app/stylesheets/application.sass', <<-EOF4
+    append_file 'app/stylesheets/application.sass', <<-EOF40
 
 #user_nav
   float: right
   font-size: 12px
-    EOF4
+    EOF40
   end
 end
 
+git_commit 'rails generate devise:views' do
+  generate :'devise:views'
+end
+
+git_commit 'HAMLize some Devise templates' do
+  %w{
+    sessions/new
+    registrations/new
+  }.each do |file|
+    git :rm => "app/views/devise/#{file}.html.erb"
+    install_template "app/views/devise/#{file}.html.haml"
+  end
+end

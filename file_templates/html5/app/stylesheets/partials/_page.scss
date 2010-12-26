@@ -75,6 +75,10 @@ header {
   #logo {
     font-weight: bold;
     font-size: 2.5em;
+    a {
+      text-decoration: none;
+      color: $font-color;
+    }
   }
 
   #user_nav {
