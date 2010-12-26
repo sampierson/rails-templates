@@ -1,10 +1,10 @@
 #user_nav
   - if user_signed_in?
-    = t('devise.links.signed_in_as', :user => current_user.email)
-    = link_to t('devise.links.sign_out'), destroy_user_session_path
+    = t('devise.sessions.signed_in_as', :user => current_user.email)
+    = link_to t('devise.sessions.sign_out'), destroy_user_session_path
   - else
-    = link_to t('devise.links.sign_up'), new_user_registration_path
+    = link_to t('devise.registrations.sign_up'), new_user_registration_path
     or
-    = link_to t('devise.links.sign_in'), new_user_session_path
+    = link_to t('devise.sessions.sign_in'), new_user_session_path
 #logo
-  Logo
+  = link_to "Logo", root_path

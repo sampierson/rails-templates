@@ -17,6 +17,7 @@ TEMPLATES = [
   'home_controller',                              # A simple controller around which we can wrap authentication
   'devise',                                       # Authentication
   # 'jquery' - done already if we're using compass+html5
+  'i18n',
   'herokuize'
 ].each do |template|
   apply "#{TEMPLATES_REPOSITORY}/_#{template}.rb"
