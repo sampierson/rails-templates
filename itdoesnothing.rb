@@ -15,8 +15,9 @@ TEMPLATES = [
   'compass+html5',                                # Templating/layout: haml compass+blueprint compass+html5
   'style',                                        # Customize layout
   'home_controller',                              # A simple controller around which we can wrap authentication
-  'devise'                                        # Authentication
+  'devise',                                       # Authentication
   # 'jquery' - done already if we're using compass+html5
+  'herokuize'
 ].each do |template|
   apply "#{TEMPLATES_REPOSITORY}/_#{template}.rb"
 end
