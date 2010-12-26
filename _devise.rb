@@ -9,6 +9,9 @@ end
 
 git_commit 'Configure devise initializer' do
   gsub_file 'config/initializers/devise.rb',
+            'config.mailer_sender = "please-change-me@config-initializers-devise.com"',
+            'config.mailer_sender = "no-reply@itdoesnothing.com"'
+  gsub_file 'config/initializers/devise.rb',
             '# config.confirm_within = 2.days',
             'config.confirm_within = 0'
   gsub_file 'config/initializers/devise.rb',
