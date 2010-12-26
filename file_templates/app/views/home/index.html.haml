@@ -6,15 +6,24 @@
 %br
 %ul
   %li
-    Test frameworks
+    Installed test frameworks
     %ul
-      %li RSpec
-      %li Cover Me (code coverage)
-      %li Cucumber/capybara
+      %li= link_to 'RSpec 2', 'http://relishapp.com/rspec'
+      %li
+        = link_to 'Cover Me', 'https://github.com/markbates/cover_me'
+        (code coverage)
+      %li
+        = link_to 'Cucumber', 'http://cukes.info/'
+        / Capybara
   %li
-    Compass with HTML5-Boilerplate
+    = link_to 'Compass', 'http://compass-style.org/'
+    with sporkd's
+    = link_to 'HTML5-Boilerplate', 'https://github.com/sporkd/compass-html5-boilerplate'
+    extension
   %li
-    Authentication using Devise including email confirmations (:confirmable).
+    Authentication using
+    = link_to 'Devise', 'https://github.com/plataformatec/devise'
+    including email confirmations (:confirmable).
     - if Devise.mailer_sender == "please-change-me@config-initializers-devise.com"
       %div{ :style => 'color: red' }
         Please change Devise.mailer sender in config/initializers/devise.rb
@@ -27,12 +36,22 @@
 Git is used to record every step in the construction of the application,
 so you can see exactly what was done at each step.
 %h2 Usage
+
 %h4 Rails >= 3.0.4
 %pre
   rails new &lt;application-name&gt; --skip-test-unit --skip-prototype --template=https://github.com/sampierson/rails-templates/raw/master/itdoesnothing.rb
-%h4 Rails 3 < 3.0.4
+
+%h4 Rails 3.0 to 3.0.3
 There is a bug in Rails versions < 3.0.4 that will not allow you to use https:// addresses for templates.
 So to use this template, just use curl to download it and run it from your local disk:
 %pre
   curl -O https://github.com/sampierson/rails-templates/raw/master/itdoesnothing.rb
-  rails new <application-name> --skip-test-unit --skip-prototype --template=itdoesnothing.rb
+  rails new &lt;application-name&lt; --skip-test-unit --skip-prototype --template=itdoesnothing.rb
+
+In fact, this website was generated in it's entirety with the following commands:
+%pre
+  heroku create --stack bamboo-mri-1.9.2 itdoesnothing
+  heroku config:add BUNDLE_WITHOUT="development:test"
+  git push heroku master
+  heroku rake db:migrate
+  heroku addons:add sendgrid:free
