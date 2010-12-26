@@ -1,0 +1,21 @@
+#flash {
+  margin: auto;
+  width: 80%;
+
+  .flash {
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    padding: 8px 5px;
+    text-align: center;
+  }
+
+  .notice {
+    background-color: #CFC;
+    border: solid 1px #6C6;
+  }
+
+  .alert {
+    background-color: #FCC;
+    border: solid 1px #C66;
+  }
+}
