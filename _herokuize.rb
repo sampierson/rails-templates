@@ -7,8 +7,8 @@ git_commit "Turn on serve_static_assets (for Heroku)" do
 end
 
 git_commit "Turn off SASS compilation in production (for Heroku)" do
-  create_file "config/initializers/heroku_sass.rb" do
-    "Sass::Plugin.options[:never_update] = true\n"
+  append_file "config/environments/production.rb" do
+    "\n\nSass::Plugin.options[:never_update] = true\n"
   end
 end
 
