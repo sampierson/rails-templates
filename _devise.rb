@@ -68,31 +68,27 @@ git_commit 'Turn on :confirmable and :lockable' do
 end
 
 git_commit 'Devise links in layout' do
-  HTML5_BOILERPLATE_HEADER_FILE = 'app/views/layouts/_header.html.haml'
-  if File.exist? HTML5_BOILERPLATE_HEADER_FILE # Assume we are using Compass HTML5-Boilerplate
-    remove_file HTML5_BOILERPLATE_HEADER_FILE
-    create_file HTML5_BOILERPLATE_HEADER_FILE, <<-EOF
-#user_nav
-  - if user_signed_in?
-    Signed in as \#{current_user.email}. Not you?
-    = link_to "Sign out", destroy_user_session_path
-  - else
-    = link_to "Sign up", new_user_registration_path
-    or
-    = link_to "sign in", new_user_session_path
-#logo
-  Logo
-  EOF
-    gsub_file 'app/stylesheets/partials/_page.scss', "header {}\n", <<-EOF
+  header_template = 'app/views/layouts/_header.html.haml'
+  if File.exist? header_template # Assume we are using Compass HTML5-Boilerplate
+    remove_file header_template
+    install_template header_template
+    gsub_file 'app/stylesheets/partials/_page.scss', "header {}\n", <<-EOF1
 header {
   #user_nav {
     float: right;
   }
 }
-    EOF
+    EOF1
+    append_file 'config/locales/devise.en.yml', <<-EOF2
+    links:
+      sign_in: Sign in
+      sign_out: Sign out
+      sign_up: Sign up
+      signed_in_as: Signed in as %{current_user.email}. Not you?
+    EOF2
   else
     inject_into_file 'app/views/layouts/application.html.haml', :after => "#container\n" do
-      <<-EOF
+      <<-EOF3
       #user_nav
         - if user_signed_in?
           Signed in as \#{current_user.email}. Not you?
@@ -100,18 +96,18 @@ header {
         - else
           = link_to "Sign up", new_user_registration_path
           or
-          = link_to "sign in", new_user_session_path
-      EOF
+          = link_to "Sign in", new_user_session_path
+      EOF3
     end
   end
 
   if File.exist? 'app/stylesheets/application.sass'
-    append_file 'app/stylesheets/application.sass', <<-EOF
+    append_file 'app/stylesheets/application.sass', <<-EOF4
 
 #user_nav
   float: right
   font-size: 12px
-    EOF
+    EOF4
   end
 end
 
