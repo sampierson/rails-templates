@@ -82,14 +82,19 @@ header {
   }
 }
 
+$main-padding: 20px;
+$footer-height: 20px;
+$footer-padding: 5px;
+$total-footer-height: $footer-height + $footer-padding * 2;
+
 #main {
-  padding: 20px 20px 50px 20px;
+  padding: $main-padding $main-padding ($main-padding + $total-footer-height) $main-padding;
 }
 
 footer {
-  height: 20px;
-  padding: 5px;
-  margin-top: -30px;
+  height: $footer-height;
+  padding: $footer-padding;
+  margin-top: -1 * $total-footer-height;
 
   background-color: #E0E0E0;
 
