@@ -1,5 +1,5 @@
 git_commit "I18n" do
-  install_template 'lib/tasks/l10n.rake'
+  install_file 'lib/tasks/l10n.rake'
 
   inject_into_file 'app/controllers/application_controller.rb', :after => "protect_from_forgery\n" do
     <<-EOF

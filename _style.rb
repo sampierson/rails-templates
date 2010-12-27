@@ -4,7 +4,7 @@
 
 git_commit "Add some minimal style to shape the layout.\n\n" do
   remove_file 'app/views/layouts/application.html.haml'
-  install_template 'app/views/layouts/application.html.haml', :flavor => 'html5'
+  install_file 'app/views/layouts/application.html.haml', :flavor => 'html5'
 
   insert_into_file 'app/helpers/application_helper.rb', :before => "\nend" do
     <<-EOF
@@ -17,14 +17,14 @@ git_commit "Add some minimal style to shape the layout.\n\n" do
   end
 
   remove_file 'app/stylesheets/partials/_page.scss'
-  install_template 'app/stylesheets/partials/_page.scss', :flavor => 'html5'
+  install_file 'app/stylesheets/partials/_page.scss', :flavor => 'html5'
 
-  install_template 'app/stylesheets/partials/_flash.scss'
+  install_file 'app/stylesheets/partials/_flash.scss'
   append_file 'app/stylesheets/style.scss', "\n@import 'partials/flash';\n"
   gsub_file 'app/views/layouts/_flashes.html.haml',
             ':class => key',
             ':class => "flash #{key}"'
 
-  install_template 'app/stylesheets/partials/_pages.scss'
+  install_file 'app/stylesheets/partials/_pages.scss'
   append_file 'app/stylesheets/style.scss', "@import 'partials/pages';\n"
 end

@@ -72,7 +72,7 @@ git_commit 'Add devise login/registration links to layout' do
   header_template = 'app/views/layouts/_header.html.haml'
   if File.exist? header_template # Assume we are using Compass HTML5-Boilerplate
     remove_file header_template
-    install_template header_template
+    install_file header_template
     gsub_file 'app/stylesheets/partials/_page.scss', "header {}\n", <<-EOF10
 header {
   #user_nav {
@@ -138,6 +138,6 @@ git_commit 'HAMLize some Devise templates' do
     registrations/new
   }.each do |file|
     git :rm => "app/views/devise/#{file}.html.erb"
-    install_template "app/views/devise/#{file}.html.haml"
+    install_file "app/views/devise/#{file}.html.haml"
   end
 end

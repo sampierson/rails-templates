@@ -43,5 +43,5 @@ git_commit 'Add User#admin?' do
 end
 
 git_commit 'Create cancan Ability class' do
-  install_template 'app/models/ability.rb'
+  install_file 'app/models/ability.rb'
 end

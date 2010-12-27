@@ -7,10 +7,10 @@ git_commit "Bundle will_paginate gem" do
 end
 
 git_commit "Create Admin::UsersController" do
-  install_template 'app/controllers/admin/users_controller.rb'
-  install_template 'app/views/admin/users/index.html.haml'
-  install_template 'app/views/admin/users/_users.html.haml'
-  install_template 'app/views/admin/users/index.js.erb'
+  install_file 'app/controllers/admin/users_controller.rb'
+  install_file 'app/views/admin/users/index.html.haml'
+  install_file 'app/views/admin/users/_users.html.haml'
+  install_file 'app/views/admin/users/index.js.erb'
   insert_into_file 'app/models/user.rb', :before => "\nend" do
     <<-EOF
 
@@ -60,14 +60,14 @@ git_commit "Create Admin::UsersController" do
     EOF
   end
 
-  install_template 'app/stylesheets/partials/_table.scss'
+  install_file 'app/stylesheets/partials/_table.scss'
   append_file 'app/stylesheets/style.scss', "@import 'partials/table';\n"
 
   remove_file 'config/locales/en.yml'
-  install_template 'config/locales/en.yml'
+  install_file 'config/locales/en.yml'
 
-  install_template 'public/images/up_arrow.gif'
-  install_template 'public/images/down_arrow.gif'
+  install_file 'public/images/up_arrow.gif'
+  install_file 'public/images/down_arrow.gif'
 
   append_file 'public/javascripts/application.js' do
     <<-EOF
