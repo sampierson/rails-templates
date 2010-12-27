@@ -19,6 +19,7 @@ TEMPLATES = [
   'cancan',
   # 'jquery' - done already if we're using compass+html5
   'i18n',
+  'admin_users',
   'herokuize'
 ].each do |template|
   apply "#{TEMPLATES_REPOSITORY}/_#{template}.rb"

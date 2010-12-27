@@ -22,6 +22,7 @@ end
 git_commit 'Add User#admin?' do
   insert_into_file 'app/models/user.rb', :before => "end\n" do
     <<-EOF
+    
   def admin?
     role == 'admin'
   end

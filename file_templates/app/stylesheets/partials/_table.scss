@@ -1,0 +1,25 @@
+th, td {
+  padding: 2px 4px;
+  border: 2px solid white;
+}
+
+th {
+  background-color: #E0E0E0;
+}
+
+.odd {
+  background-color: #f0f8ff;
+}
+
+th .current_sort {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+th .current_sort.asc {
+  background-image: url(/images/up_arrow.gif);
+}  
+
+th .current_sort.desc {
+  background-image: url(/images/down_arrow.gif);
+}

@@ -1,0 +1,25 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  activerecord:
+    models:
+      user: User
+    attributes:
+      user:
+        created_at: Created
+        current_sign_in_at: Current sign-in at
+        current_sign_in_ip: Current sign-in ip
+        confirmed_at: Confirmed
+        email: Email address
+        locked_at: Locked
+        password: Password
+        role: Role
+        sign_in_count: Sign-ins
+  at: At
+  current_sign_in: Current sign-in
+  last_sign_in: Last sign-in
+  from_ip: From IP
+  search: Search
+  time_ago: %{time} ago
+  users: Users
