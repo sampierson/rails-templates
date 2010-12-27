@@ -1,6 +1,6 @@
 git_commit('bundle haml') do
   gem "haml"
-  bundle_install
+  bundle :install
 end
 
 git_commit('get sass files from app/stylesheets') do

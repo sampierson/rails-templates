@@ -12,8 +12,11 @@ def run_and_commit(command, options={})
   end
 end
 
-def bundle_install
-  run 'bundle install --quiet'
+def bundle(command, options = {})
+  default_options = { :quiet => true }
+  actual_options = default_options.merge(options)
+  options = actual_options.inject("") { |memo, kv| memo << " --#{kv.first}" if kv.last; memo }
+  run "bundle #{command} #{options}"
 end
 
 # Install a file

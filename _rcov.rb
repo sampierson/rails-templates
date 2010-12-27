@@ -1,6 +1,6 @@
 git_commit('add rcov support') do
   gem 'rcov', '>= 0.9.9'
-  bundle_install
+  bundle :install
 
   if Rails::VERSION::STRING == "3.0.0"
     puts "Adding fixed rake task 'rcov'"

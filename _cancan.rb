@@ -1,6 +1,6 @@
 git_commit 'Bundle cancan gem' do
   gem 'cancan'
-  bundle_install
+  bundle :install
 end
 
 git_commit 'Add role column to User' do

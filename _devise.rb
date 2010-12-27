@@ -1,6 +1,6 @@
 git_commit 'Bundle devise gem' do
   gem 'devise'
-  bundle_install
+  bundle :install
 end
 
 git_commit 'rails generate devise:install' do

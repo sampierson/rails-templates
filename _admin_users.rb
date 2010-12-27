@@ -4,7 +4,7 @@
 
 git_commit "Bundle will_paginate gem" do
   gem 'will_paginate', '3.0.pre2'
-  bundle_install
+  bundle :install
 end
 
 git_commit "Create Admin::UsersController" do

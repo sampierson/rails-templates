@@ -2,7 +2,7 @@ git_commit("bundle cucumber, webrat gems") do
   gem "cucumber-rails", :group => [:development, :test]
   gem "nokogiri", :group => [:development, :test]
   gem "webrat", :group => [:development, :test]
-  bundle_install
+  bundle :install
 end
 
 git_commit "rails generate cucumber:install --rspec --webrat" do

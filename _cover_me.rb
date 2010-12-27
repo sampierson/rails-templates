@@ -1,6 +1,6 @@
 git_commit("bundle cover_me gem") do
   gem 'cover_me', :group => [:development, :test]
-  bundle_install  
+  bundle :install  
 end
 
 git_commit "rails generate cover_me:install" do

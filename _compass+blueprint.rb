@@ -1,7 +1,7 @@
 git_commit("bundle compass gem") do
   gem "haml"
   gem "compass"
-  bundle_install
+  bundle :install
 end
 
 run_and_commit('compass init rails . --using blueprint --sass-dir app/stylesheets --css-dir public/stylesheets')
