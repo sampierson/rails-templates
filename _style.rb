@@ -15,6 +15,6 @@ git_commit "Add some minimal style to shape the layout.\n\n" do
             ':class => key',
             ':class => "flash #{key}"'
 
-  install_template 'app/stylesheets/partials/_devise.scss'
-  append_file 'app/stylesheets/style.scss', "@import 'partials/devise';\n"
+  install_template 'app/stylesheets/partials/_pages.scss'
+  append_file 'app/stylesheets/style.scss', "@import 'partials/pages';\n"
 end
