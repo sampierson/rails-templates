@@ -70,22 +70,11 @@ git_commit "Create Admin::UsersController" do
   install_file 'public/images/up_arrow.gif'
   install_file 'public/images/down_arrow.gif'
 
-  append_file 'public/javascripts/application.js' do
-    <<-EOF
-
-$(function () {
-  // Sorting and pagination links.
-  $('#users th a, #users .pagination a').live('click', function () {
-    $.getScript(this.href);
-    return false;
-  });
-
-  // Search form.
-  $('#users_search').submit(function () {
-    $.get(this.action, $(this).serialize(), null, 'script');
-    return false;
-  });
-});
-    EOF
+  install_file "public/javascripts/#{app_name}/pages/AdminUsersIndexPage.js",
+    :source => "public/javascripts/app_name/pages/AdminUsersIndexPage.js", :template => true
+  
+  if File.directory?('spec/javascripts')
+    install_file "spec/javascripts/pages/AdminUsersIndexPageSpec.js",
+      :source => "spec/javascripts/pages/AdminUsersIndexPageSpec.js", :template => true
   end
 end
