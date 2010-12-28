@@ -6,7 +6,6 @@ end
 git_commit 'Add role column to User' do
   generate :migration, 'add_role_to_users'
   migration_file = Dir.glob('db/migrate/*_add_role_to_users.rb').first
-  puts "SAM: migration_file = #{migration_file}"
   insert_into_file migration_file, :after => "def self.up\n" do
     <<-EOF
     add_column :users, :role, :string, :default => 'user'
