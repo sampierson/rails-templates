@@ -9,6 +9,7 @@ TEMPLATES_REPOSITORY = ENV['TEMPLATES_REPOSITORY'] || 'https://github.com/sampie
 TEMPLATES = [
   'utils',
   'base+git',
+  'debug',
   'rspec2',
   (RUBY_VERSION =~ /1.9/ ? 'cover_me' : 'rcov'),  # Test coverage measurement
   'cucumber+capybara',                            # Integration test framework: cucumber-capybara cucumber+webrat
