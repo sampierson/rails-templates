@@ -9,9 +9,13 @@ git_commit "Add some minimal style to shape the layout.\n\n" do
   insert_into_file 'app/helpers/application_helper.rb', :before => "\nend" do
     <<-EOF
 
-  def body_classes
-    controller_name = controller.class.name.underscore.gsub('_controller', '').gsub('/', '_')
-    "\#{controller_name} \#{controller_name}_\#{action_name}"
+  # Include ancestors, e.g. Admin::UsersController -> "admin_users"
+  def underscored_controller_name
+    controller.class.name.underscore.gsub('_controller', '').gsub('/', '_')
+  end
+
+  def body_css_classes
+    "\#{underscored_controller_name} \#{underscored_controller_name}_\#{action_name}"
   end
     EOF
   end
