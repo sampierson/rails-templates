@@ -14,7 +14,7 @@ git_commit "Install page-specific JavaScript framework" do
       plugins
       #{app_name}/#{app_name}
     } + Dir.glob("\#{Rails.root}/public/javascripts/#{app_name}/pages/**/*.js").map { |file| file.gsub(/^\#{Rails.root}\\/public/, '') }
-    javascript_include_tag js_files, :cache => '#{app_name}-javascripts'
+    javascript_include_tag js_files
   end
     EOF
   end
