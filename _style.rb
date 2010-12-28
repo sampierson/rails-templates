@@ -2,7 +2,7 @@
 # Some minimal style
 #
 
-git_commit "Add some minimal style to shape the layout.\n\n" do
+git_commit "Add some minimal style to shape the layout" do
   remove_file 'app/views/layouts/application.html.haml'
   install_file 'app/views/layouts/application.html.haml', :flavor => 'html5'
 
