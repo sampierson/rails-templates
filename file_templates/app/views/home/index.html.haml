@@ -1,8 +1,20 @@
 %br
   %h1.center It Does Nothing, but it does it Really Well.
+%pre{ :style => 'width: 800px; margin: auto;' }
+  rails new itdoesnothing --skip-test-unit --skip-prototype \
+  &nbsp;&nbsp;--template=https://github.com/sampierson/rails-templates/raw/master/itdoesnothing.rb
+  cd itdoesnothing
+  heroku create --stack bamboo-mri-1.9.2 itdoesnothing
+  heroku config:add BUNDLE_WITHOUT="development:test"
+  git push heroku master
+  heroku rake db:migrate
+  heroku addons:add sendgrid:free
+%h2 What is it?
 %p
-  It Does Nothing is a set of Rails application templates that will create a functional Rails website that may then
-  be purposed for a specific application.  It includes:
+  ItDoesNothing is a Rails application templates that creates a functional website that is not yet purposed for a
+  specific application.
+  This website was entirely created then deployed to Heruoku using just the above commands.
+  ItDoesNothing includes:
 %br
 %ul
   %li
@@ -16,7 +28,7 @@
         for code coverage
       %li
         = link_to 'Cucumber', 'http://cukes.info/'
-        / Capybara for integration tests
+        \/ Capybara for integration tests
       %li
         = link_to "Jasmine", 'http://pivotal.github.com/jasmine/'
         for JavaScript unit tests
@@ -52,16 +64,10 @@ so you can see exactly what was done at each step.
   rails new &lt;application-name&gt; --skip-test-unit --skip-prototype --template=https://github.com/sampierson/rails-templates/raw/master/itdoesnothing.rb
 
 %h4 Rails 3.0 to 3.0.3
-There is a bug in Rails versions < 3.0.4 that will not allow you to use https:// addresses for templates.
-So to use this template, just use curl to download it and run it from your local disk:
+There is a bug in Rails versions < 3.0.4 that will not allow you to use https addresses for templates.
+So just checkout the template repository and run the template locally:
 %pre
-  curl -O https://github.com/sampierson/rails-templates/raw/master/itdoesnothing.rb
-  rails new &lt;application-name&lt; --skip-test-unit --skip-prototype --template=itdoesnothing.rb
+  git clone git://github.com/sampierson/rails-templates.git
+  export TEMPLATES_REPOSITORY=`pwd`/rails-templates
+  rails new &lt;application-name&gt; --skip-test-unit --skip-prototype --template=rails-templates/itdoesnothing.rb
 
-In fact, this website was generated in it's entirety with the following commands:
-%pre
-  heroku create --stack bamboo-mri-1.9.2 itdoesnothing
-  heroku config:add BUNDLE_WITHOUT="development:test"
-  git push heroku master
-  heroku rake db:migrate
-  heroku addons:add sendgrid:free
