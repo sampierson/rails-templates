@@ -8,13 +8,18 @@
   %li
     Installed test frameworks
     %ul
-      %li= link_to 'RSpec 2', 'http://relishapp.com/rspec'
+      %li
+        = link_to 'RSpec 2', 'http://relishapp.com/rspec'
+        for Ruby unit and functional tests
       %li
         = link_to 'Cover Me', 'https://github.com/markbates/cover_me'
-        (code coverage)
+        for code coverage
       %li
         = link_to 'Cucumber', 'http://cukes.info/'
-        / Capybara
+        / Capybara for integration tests
+      %li
+        = link_to "Jasmine", 'http://pivotal.github.com/jasmine/'
+        for JavaScript unit tests
   %li
     = link_to 'Compass', 'http://compass-style.org/'
     with sporkd's
@@ -30,6 +35,11 @@
     - if Rails.application.config.action_mailer.default_url_options[:host] =~ /localhost/
       %div{ :style => 'color: red' }
         Please change action_mailer.default_url_options in config/environments/#{Rails.env}.rb
+  %li
+    Authorization using
+    = link_to 'CanCan', "https://github.com/ryanb/cancan"
+  %li
+    Administrator's User Management page
   %li
     Internationalization
 %br

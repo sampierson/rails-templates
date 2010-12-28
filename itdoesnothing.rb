@@ -20,6 +20,8 @@ TEMPLATES = [
   'cancan',
   # 'jquery' - done already if we're using compass+html5
   'i18n',
+  'jasmine',
+  'page_specific_js_framework',
   'admin_users',
   'herokuize'
 ].each do |template|
