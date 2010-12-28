@@ -1,5 +1,5 @@
 git_commit "Bundle jasmine gem" do
-  gem 'jasmine'
+  gem 'jasmine', :group => [:development, :test]
   bundle :install
 end
 
