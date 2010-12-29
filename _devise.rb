@@ -37,8 +37,10 @@ git_commit 'Changes suggested by devise:install' do
   end
 end
 
-git_commit 'rails generate devise User' do
+git_commit "rails generate devise User\n\nand delete the 'pending' test from the User spec file" do
   generate :'devise', 'User'
+  remove_file  'spec/models/user_spec.rb'
+  install_file 'spec/models/user_spec.rb'
 end
 
 git_commit 'Turn on :confirmable and :lockable' do
@@ -65,15 +67,6 @@ git_commit 'Turn on :confirmable and :lockable' do
             "signed_up: 'You have signed up successfully. If enabled, a confirmation was sent to your e-mail.'",
             "signed_up: 'You have registered successfully and have been sent a confirmation email.  To complete the sign-up progess, please click on the link contained in that email.'"
 
-end
-
-git_commit "Setup devise test helper" do
-  insert_into_file 'spec/spec_helper.rb', :before => "\nend" do
-    <<-EOF
-    
-  config.include Devise::TestHelpers
-    EOF
-  end
 end
 
 git_commit 'Add devise login/registration links to layout' do

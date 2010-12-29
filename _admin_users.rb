@@ -16,12 +16,23 @@ git_commit "Create Admin::UsersController" do
   insert_into_file 'app/models/user.rb', :before => "\nend" do
     <<-EOF
 
-
   def self.search(search)
     if search
       where('email LIKE ?', "%\#{search}%")
     else
       scoped
+    end
+  end
+    EOF
+  end
+
+  insert_into_file 'spec/models/user_spec.rb', :before => "\nend" do
+    <<-EOF
+
+  describe ".search" do
+    it "should execute a LIKE query with the supplied argument" do
+      User.should_receive(:where).with("email LIKE ?", "%foo%")
+      User.search("foo")
     end
   end
     EOF
@@ -45,6 +56,7 @@ git_commit "Create Admin::UsersController" do
 
   insert_into_file 'config/routes.rb', :before => "\nend" do
     <<-EOF
+
 
   namespace :admin do
     resources :users

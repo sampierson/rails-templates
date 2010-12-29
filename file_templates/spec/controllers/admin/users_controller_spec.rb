@@ -1,10 +1,12 @@
 require 'spec_helper'
 
 describe Admin::UsersController do
+  include Devise::TestHelpers
   fixtures :users
 
   context "when not logged in" do
     it "should redirect back to the login page with a flash message" do
+      sign_out(:user)
       get :index
       response.should redirect_to(new_user_session_path)
       flash[:alert].should include("need to sign in")
@@ -25,7 +27,7 @@ describe Admin::UsersController do
 
   context "while logged in as an admin user" do
     before do
-      sign_in users(:admin_user)
+      sign_in users(:confirmed_admin_user)
     end
 
     describe "#index" do
@@ -64,5 +66,17 @@ describe Admin::UsersController do
         get :index, :search => 'fake_search'
       end
     end
+
+    context "rendering views" do
+      render_views
+
+      it "gets saved as a fixture" do
+        pending
+        get :index
+        response.should be_success
+        save_fixture(html_for('body'), 'admin_users_controller_index')
+      end
+    end
+
   end
 end
