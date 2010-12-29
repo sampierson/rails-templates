@@ -9,11 +9,13 @@ end
 
 git_commit "Create Admin::UsersController" do
   install_file 'app/controllers/admin/users_controller.rb'
+  install_file 'spec/controllers/admin/users_controller_spec.rb'
   install_file 'app/views/admin/users/index.html.haml'
   install_file 'app/views/admin/users/_users.html.haml'
   install_file 'app/views/admin/users/index.js.erb'
   insert_into_file 'app/models/user.rb', :before => "\nend" do
     <<-EOF
+
 
   def self.search(search)
     if search

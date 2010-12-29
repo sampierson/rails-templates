@@ -67,6 +67,15 @@ git_commit 'Turn on :confirmable and :lockable' do
 
 end
 
+git_commit "Setup devise test helper" do
+  insert_into_file 'spec/spec_helper.rb', :before => "\nend" do
+    <<-EOF
+    
+  config.include Devise::TestHelpers
+    EOF
+  end
+end
+
 git_commit 'Add devise login/registration links to layout' do
 
   header_template = 'app/views/layouts/_header.html.haml'

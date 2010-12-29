@@ -1,7 +1,7 @@
 require File.join(File.dirname(__FILE__), '_utils')
 
 git_commit "Install page-specific JavaScript framework" do
-  remove_file 'public/javascripts/application.js'
+  git :rm => 'public/javascripts/application.js'
   empty_directory  "public/javascripts/#{app_name}"
   install_file "public/javascripts/#{app_name}/#{app_name}.js", :source => "public/javascripts/app_name/app_name.js", :method => :template
 

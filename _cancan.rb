@@ -18,6 +18,10 @@ git_commit 'Add role column to User' do
   end
 end
 
+git_commit 'Add a fixture file for Users' do
+  install_file 'spec/fixtures/users.yml'
+end
+
 git_commit 'Add User#admin?' do
   insert_into_file 'app/models/user.rb', :before => "end\n" do
     <<-EOF
@@ -29,7 +33,7 @@ git_commit 'Add User#admin?' do
   end
 end
 
-git_commit 'Add User#admin?' do
+git_commit 'Rescue CanCan:AccessDenied exceptions in ApplicationController' do
   insert_into_file 'app/controllers/application_controller.rb', :before => "end\n" do
     <<-EOF
   rescue_from CanCan::AccessDenied do |exception|
