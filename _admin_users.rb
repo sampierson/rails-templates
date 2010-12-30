@@ -78,8 +78,7 @@ git_commit "Create Admin::UsersController" do
   install_file 'app/stylesheets/partials/_table.scss'
   append_file 'app/stylesheets/style.scss', "@import 'partials/table';\n"
 
-  remove_file 'config/locales/en.yml'
-  install_file 'config/locales/en.yml'
+  replace_file 'config/locales/en.yml'
 
   install_file 'public/images/up_arrow.gif'
   install_file 'public/images/down_arrow.gif'

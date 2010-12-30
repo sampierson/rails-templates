@@ -39,8 +39,7 @@ end
 
 git_commit "rails generate devise User\n\nand delete the 'pending' test from the User spec file" do
   generate :'devise', 'User'
-  remove_file  'spec/models/user_spec.rb'
-  install_file 'spec/models/user_spec.rb'
+  replace_file  'spec/models/user_spec.rb'
 end
 
 git_commit 'Turn on :confirmable and :lockable' do
@@ -73,8 +72,7 @@ git_commit 'Add devise login/registration links to layout' do
 
   header_template = 'app/views/layouts/_header.html.haml'
   if File.exist? header_template # Assume we are using Compass HTML5-Boilerplate
-    remove_file header_template
-    install_file header_template
+    replace_file header_template
     gsub_file 'app/stylesheets/partials/_page.scss', "header {}\n", <<-EOF10
 header {
   #user_nav {

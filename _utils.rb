@@ -33,3 +33,12 @@ def install_file(path, options = {})
   method = options.delete(:method) || (TEMPLATES_REPOSITORY =~ /^https?:/ ? :get : :copy_file)
   send method, source_path, path
 end
+
+def replace_file(path, options = {})
+  remove_file path
+  install_file path, options
+end
+
+def replace_file_with(path, string)
+  File.open(path, "w") { |file| file.write string }
+end
