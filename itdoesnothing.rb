@@ -23,7 +23,8 @@ TEMPLATES = [
   'jasmine',
   'page_specific_js_framework',
   'admin_users',
-  'herokuize'
+  'herokuize',
+  'spork'
 ].each do |template|
   apply "#{TEMPLATES_REPOSITORY}/_#{template}.rb"
 end
