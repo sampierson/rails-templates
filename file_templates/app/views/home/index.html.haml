@@ -1,10 +1,10 @@
 %br
   %h1.center It Does Nothing, but it does it Really Well.
 %pre{ :style => 'width: 800px; margin: auto;' }
-  rails new itdoesnothing --skip-test-unit --skip-prototype \
+  rails new application_name --skip-test-unit --skip-prototype \
   &nbsp;&nbsp;--template=https://github.com/sampierson/rails-templates/raw/master/itdoesnothing.rb
   cd itdoesnothing
-  heroku create --stack bamboo-mri-1.9.2 itdoesnothing
+  heroku create --stack bamboo-mri-1.9.2 application_name
   heroku config:add BUNDLE_WITHOUT="development:test"
   git push heroku master
   heroku rake db:migrate
