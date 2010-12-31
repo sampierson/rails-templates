@@ -1,13 +1,13 @@
-git_commit 'Bundle devise gem' do
+git_commit '[Devise] Bundle devise gem' do
   gem 'devise'
   bundle :install
 end
 
-git_commit 'rails generate devise:install' do
+git_commit '[Devise] rails generate devise:install' do
   generate :'devise:install'
 end
 
-git_commit 'Configure devise initializer' do
+git_commit '[Devise] Configure devise initializer' do
   gsub_file 'config/initializers/devise.rb',
             'config.mailer_sender = "please-change-me@config-initializers-devise.com"',
             'config.mailer_sender = "no-reply@itdoesnothing.com"'
@@ -25,7 +25,7 @@ git_commit 'Configure devise initializer' do
             'config.maximum_attempts = 8'
 end
 
-git_commit 'Changes suggested by devise:install' do
+git_commit '[Devise] Changes suggested by devise:install' do
   [
     { :environment => :development, :email_from_host => 'localhost:3000' },
     { :environment => :test,        :email_from_host => 'localhost:3000' },
@@ -42,7 +42,7 @@ git_commit "rails generate devise User\n\nand delete the 'pending' test from the
   replace_file  'spec/models/user_spec.rb'
 end
 
-git_commit 'Turn on :confirmable and :lockable' do
+git_commit '[Devise] Turn on :confirmable and :lockable' do
   gsub_file 'app/models/user.rb',
             '# :token_authenticatable, :confirmable, :lockable and :timeoutable',
             '# :token_authenticatable and :timeoutable'
@@ -68,7 +68,7 @@ git_commit 'Turn on :confirmable and :lockable' do
 
 end
 
-git_commit 'Add devise login/registration links to layout' do
+git_commit '[Devise] Add devise login/registration links to layout' do
 
   header_template = 'app/views/layouts/_header.html.haml'
   if File.exist? header_template # Assume we are using Compass HTML5-Boilerplate
@@ -128,11 +128,11 @@ header {
   end
 end
 
-git_commit 'rails generate devise:views' do
+git_commit '[Devise] rails generate devise:views' do
   generate :'devise:views'
 end
 
-git_commit 'HAMLize some Devise templates' do
+git_commit '[Devise] HAMLize some Devise templates' do
   %w{
     sessions/new
     registrations/new
