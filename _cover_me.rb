@@ -1,13 +1,13 @@
-git_commit("bundle cover_me gem") do
-  gem 'cover_me', :group => [:development, :test]
+git_commit("[cover_me] bundle cover_me gem") do
+  gem 'cover_me', :group => :test
   bundle :install  
 end
 
-git_commit "rails generate cover_me:install" do
+git_commit "[cover_me] rails generate cover_me:install" do
   generate :'cover_me:install'
 end
 
-git_commit "Configure cover_me" do
+git_commit "[cover_me] Configure cover_me" do
 
   insert_into_file('lib/tasks/cover_me.rake', :after => "task :report do\n    require 'cover_me'\n") do
     <<-'END'
