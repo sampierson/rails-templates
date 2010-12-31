@@ -1,9 +1,9 @@
-git_commit 'Bundle cancan gem' do
+git_commit '[cancan] Bundle cancan gem' do
   gem 'cancan'
   bundle :install
 end
 
-git_commit 'Add role column to User' do
+git_commit '[cancan] Add role column to User' do
   generate :migration, 'add_role_to_users'
   migration_file = Dir.glob('db/migrate/*_add_role_to_users.rb').first
   insert_into_file migration_file, :after => "def self.up\n" do
@@ -14,14 +14,14 @@ git_commit 'Add role column to User' do
   end
 end
 
-git_commit 'Add a fixture file for Users' do
+git_commit '[cancan] Add a fixture file for Users' do
   install_file 'spec/fixtures/users.yml'
   insert_into_file 'spec/models/user_spec.rb', :after => "User do\n" do
     "  fixtures :users\n"
   end
 end
 
-git_commit 'Add User#admin?' do
+git_commit '[cancan] Add User#admin?' do
   insert_into_file 'app/models/user.rb', :before => "\nend" do
     <<-EOF
 
@@ -49,7 +49,7 @@ git_commit 'Add User#admin?' do
   end
 end
 
-git_commit 'Rescue CanCan:AccessDenied exceptions in ApplicationController' do
+git_commit '[cancan] Rescue CanCan:AccessDenied exceptions in ApplicationController' do
   insert_into_file 'app/controllers/application_controller.rb', :before => "\nend" do
     <<-EOF
 
@@ -61,6 +61,6 @@ git_commit 'Rescue CanCan:AccessDenied exceptions in ApplicationController' do
   end
 end
 
-git_commit 'Create cancan Ability class' do
+git_commit '[cancan] Create cancan Ability class' do
   install_file 'app/models/ability.rb'
 end

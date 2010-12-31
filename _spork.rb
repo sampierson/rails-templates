@@ -1,9 +1,9 @@
-git_commit "Bundle spork gem" do
+git_commit "[spork] Bundle spork gem" do
   gem 'spork', :group => [:development, :test]
   bundle :install
 end
 
-git_commit "Configure spec_helper and .rspec for spork" do
+git_commit "[spork] Configure spec_helper and .rspec for spork" do
   spec_file = 'spec/spec_helper.rb'
   gsub_file spec_file, /^/, "  "
   prepend_file spec_file, <<-EOF
