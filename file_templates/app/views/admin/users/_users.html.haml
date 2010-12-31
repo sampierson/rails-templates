@@ -3,31 +3,31 @@
 = will_paginate @users
 %table
   %tr
-    %th=                 sortable :email,              t('activerecord.attributes.user.email')
-    %th=                 sortable :role,               t('activerecord.attributes.user.role')
-    %th=                 sortable :sign_in_count,      t('activerecord.attributes.user.sign_in_count')
+    %th.email=           sortable :email,              t('activerecord.attributes.user.email')
+    %th.role=            sortable :role,               t('activerecord.attributes.user.role')
+    %th.sign_in_count=   sortable :sign_in_count,      t('activerecord.attributes.user.sign_in_count')
     %th{ :colspan => 2}= sortable :current_sign_in_at, t('current_sign_in')
     %th{ :colspan => 2}= sortable :last_sign_in_at,    t('last_sign_in')
-    %th=                 sortable :created_at,         t('activerecord.attributes.user.created_at')
-    %th=                 sortable :confirmed_at,       t('activerecord.attributes.user.confirmed_at')
-    %th=                 sortable :locked_at,          t('activerecord.attributes.user.locked_at')
+    %th.created_at=      sortable :created_at,         t('activerecord.attributes.user.created_at')
+    %th.confirmed_at=    sortable :confirmed_at,       t('activerecord.attributes.user.confirmed_at')
+    %th.locked_at=       sortable :locked_at,          t('activerecord.attributes.user.locked_at')
   %tr
     %th{ :colspan => 3 }
-    %th= sortable :current_sign_in_at, t('at')
-    %th= t('from_ip')
-    %th= sortable :last_sign_in_at, t('at')
-    %th= t('from_ip')
+    %th.current_sign_in_at= sortable :current_sign_in_at, t('at')
+    %th.current_sign_in_ip= t('from_ip')
+    %th.last_sign_in_at=    sortable :last_sign_in_at, t('at')
+    %th.last_sign_ip_ip=    t('from_ip')
     %th{ :colspan => 5 }
 
   - @users.each do |user|
     %tr{ :class => cycle('odd', 'even') }
-      %td.email= user.email
-      %td.role= user.role
-      %td.sign_in_count= user.sign_in_count
+      %td.email=              user.email
+      %td.role=               user.role
+      %td.sign_in_count=      user.sign_in_count
       %td.current_sign_in_at= time_ago(user.current_sign_in_at)
       %td.current_sign_in_ip= user.current_sign_in_ip
-      %td.last_sign_in_at= time_ago(user.last_sign_in_at)
-      %td.last_sign_in_ip= user.last_sign_in_ip
-      %td.created_at= time_ago(user.created_at)
-      %td.confirmed_at= time_ago(user.confirmed_at)
-      %td.locked_at= time_ago(user.locked_at)
+      %td.last_sign_in_at=    time_ago(user.last_sign_in_at)
+      %td.last_sign_in_ip=    user.last_sign_in_ip
+      %td.created_at=         time_ago(user.created_at)
+      %td.confirmed_at=       time_ago(user.confirmed_at)
+      %td.locked_at=          time_ago(user.locked_at)

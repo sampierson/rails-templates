@@ -71,7 +71,6 @@ describe Admin::UsersController do
       render_views
 
       it "gets saved as a fixture" do
-        pending
         get :index
         response.should be_success
         save_fixture(html_for('body'), 'admin_users_controller_index')

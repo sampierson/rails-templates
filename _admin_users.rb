@@ -2,12 +2,12 @@
 # Admin::UsersController
 #
 
-git_commit "Bundle will_paginate gem" do
+git_commit "[AdminUsers] Bundle will_paginate gem" do
   gem 'will_paginate', '3.0.pre2'
   bundle :install
 end
 
-git_commit "Create Admin::UsersController" do
+git_commit "[AdminUsers] Create Admin::UsersController" do
   install_file 'app/controllers/admin/users_controller.rb'
   install_file 'spec/controllers/admin/users_controller_spec.rb'
   install_file 'app/views/admin/users/index.html.haml'
@@ -84,10 +84,12 @@ git_commit "Create Admin::UsersController" do
   install_file 'public/images/down_arrow.gif'
 
   install_file "public/javascripts/#{app_name}/pages/AdminUsersIndexPage.js",
-    :source => "public/javascripts/app_name/pages/AdminUsersIndexPage.js", :template => true
+    :source => "public/javascripts/app_name/pages/AdminUsersIndexPage.js",
+    :method => :template
   
   if File.directory?('spec/javascripts')
     install_file "spec/javascripts/pages/AdminUsersIndexPageSpec.js",
-      :source => "spec/javascripts/pages/AdminUsersIndexPageSpec.js", :template => true
+      :source => "spec/javascripts/pages/AdminUsersIndexPageSpec.js",
+      :method => :template
   end
 end

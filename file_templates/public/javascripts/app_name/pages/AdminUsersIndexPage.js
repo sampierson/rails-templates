@@ -1,10 +1,10 @@
-Idn.AdminUsersIndexPage = {
+<%= app_const_base %>.AdminUsersIndexPage = {
   init: function() {
-    Idn.AdminUsersIndexPage.ajaxifyTableLinks();
-    Idn.AdminUsersIndexPage.ajaxifySearchForm();
+    <%= app_const_base %>.AdminUsersIndexPage.addBehaviorToUsersTableHeadings();
+    <%= app_const_base %>.AdminUsersIndexPage.addBehaviorToSearchForm();
   },
 
-  ajaxifyTableLinks: function() {
+  addBehaviorToUsersTableHeadings: function() {
     // Sorting and pagination links.
     $('#users th a, #users .pagination a').live('click', function () {
       $.getScript(this.href);
@@ -12,7 +12,7 @@ Idn.AdminUsersIndexPage = {
     });
   },
 
-  ajaxifySearchForm: function() {
+  addBehaviorToSearchForm: function() {
     // Search form.
     $('#users_search').submit(function () {
       $.get(this.action, $(this).serialize(), null, 'script');
