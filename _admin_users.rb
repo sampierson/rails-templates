@@ -83,7 +83,33 @@ git_commit "[AdminUsers] Create Admin::UsersController" do
   install_file 'app/stylesheets/partials/_table.scss'
   append_file 'app/stylesheets/style.scss', "@import 'partials/table';\n"
 
-  replace_file 'config/locales/en.yml'
+  add_to_locale({
+    "activerecord" => {
+      "models" => {
+        "user" => "User"
+      },
+      "attributes" => {
+        "user" => {
+          "confirmed_at" => "Confirmed",
+          "created_at" => "Created",
+          "current_sign_in_at" => "Current sign-in at",
+          "current_sign_in_ip" => "Current sign-in ip",
+          "email" => "Email address",
+          "locked_at" => "Locked",
+          "password" => "Password",
+          "role" => "Role",
+          "sign_in_count" => "Sign-ins"
+        }
+      }
+    },
+    "at" => "At",
+    "current_sign_in" => "Current sign-in",
+    "time_ago" => "%{time} ago",
+    "users" => "Users",
+    "from_ip" => "From IP",
+    "last_sign_in" => "Last sign-in",
+    "search" => "Search"
+  })
 
   install_file 'public/images/up_arrow.gif'
   install_file 'public/images/down_arrow.gif'

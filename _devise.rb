@@ -62,17 +62,16 @@ git_commit '[Devise] Turn on :confirmable and :lockable' do
   gsub_file migration_file,
             '# add_index :users, :confirmation_token,   :unique => true',
             'add_index :users, :confirmation_token,   :unique => true'
-  gsub_file 'config/locales/devise.en.yml',
-            "signed_up: 'You have signed up successfully. If enabled, a confirmation was sent to your e-mail.'",
-            "signed_up: 'You have registered successfully and have been sent a confirmation email.  To complete the sign-up progess, please click on the link contained in that email.'"
-
+  add_to_locale({
+    'signed_up' => "You have signed up successfully. If enabled, a confirmation was sent to your e-mail.",
+    'signed_up' => "You have registered successfully and have been sent a confirmation email.  To complete the sign-up progess, please click on the link contained in that email."
+  }, 'config/locales/devise.en.yml')
 end
 
 git_commit '[Devise] Add devise login/registration links to layout' do
 
-  header_template = 'app/views/layouts/_header.html.haml'
-  if File.exist? header_template # Assume we are using Compass HTML5-Boilerplate
-    replace_file header_template
+  if File.exist? 'app/views/layouts/_header.html.haml' # Assume we are using Compass HTML5-Boilerplate
+    replace_file 'app/views/layouts/_header.html.haml'
     gsub_file 'app/stylesheets/partials/_page.scss', "header {}\n", <<-EOF10
 header {
   #user_nav {
@@ -80,29 +79,6 @@ header {
   }
 }
     EOF10
-
-    gsub_file 'config/locales/devise.en.yml', "    sessions:\n", <<-EOF20
-    sessions:
-      login: Login
-      sign_in: Sign in
-      signed_in: 'Signed in successfully.'
-      sign_out: Sign out
-      signed_in_as: Signed in as %{user}.
-      signed_out: 'Signed out successfully.'
-    EOF20
-
-    gsub_file 'config/locales/devise.en.yml', "    passwords:\n", <<-EOF25
-    passwords:
-      forgot: Forgot your password?
-    EOF25
-
-    gsub_file 'config/locales/devise.en.yml', "    registrations:\n", <<-EOF25
-    registrations:
-      already_question: "Already have an account?"
-      dont_have_an_account: "Don't have an account?"
-      sign_up: Sign up
-    EOF25
-
   else
     inject_into_file 'app/views/layouts/application.html.haml', :after => "#container\n" do
       <<-EOF30
@@ -116,16 +92,35 @@ header {
           = link_to "Sign in", new_user_session_path
       EOF30
     end
-  end
 
-  if File.exist? 'app/stylesheets/application.sass'
-    append_file 'app/stylesheets/application.sass', <<-EOF40
+    if File.exist? 'app/stylesheets/application.sass'
+      append_file 'app/stylesheets/application.sass', <<-EOF40
 
 #user_nav
   float: right
   font-size: 12px
-    EOF40
+      EOF40
+    end
   end
+
+  add_to_locale({
+    'sessions' => {
+      'login'        => "Login",
+      'sign_in'      => "Sign in",
+      'signed_in'    => "Signed in successfully.",
+      'sign_out'     => "Sign out",
+      'signed_in_as' => "Signed in as %{user}.",
+      'signed_out'   => "Signed out successfully."
+    },
+    'passwords' => {
+      'forgot' => "Forgot your password?"
+    },
+    'registrations' => {
+      'already_question' => "Already have an account?",
+      'dont_have_an_account' => "Don't have an account?",
+      'sign_up' => "Sign up"
+    }
+  }, 'config/locales/devise.en.yml')
 end
 
 git_commit '[Devise] rails generate devise:views' do

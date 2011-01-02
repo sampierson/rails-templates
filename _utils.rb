@@ -42,3 +42,25 @@ end
 def replace_file_with(path, string)
   File.open(path, "w") { |file| file.write string }
 end
+
+class Hash
+  def deep_merge!(other_hash)
+    other_hash.keys.each do |key|
+      if other_hash[key].is_a?(Hash) && self[key].is_a?(Hash)
+        self[key].deep_merge!(other_hash[key])
+      else
+        self[key] = other_hash[key]
+      end
+    end
+  end
+end
+
+require 'yaml'
+
+def add_to_locale(hash, locale_file = 'config/locales/en.yml')
+  en_strings = YAML::load_file(locale_file)
+  en_strings['en'].deep_merge!(hash)
+  File.open(locale_file, 'w') do |file|
+    file.write YAML.dump(en_strings)
+  end
+end
