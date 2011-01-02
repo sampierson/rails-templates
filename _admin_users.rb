@@ -3,7 +3,12 @@
 #
 
 git_commit "[AdminUsers] Bundle will_paginate gem" do
-  gem 'will_paginate', '3.0.pre2'
+  if RUBY_VERSION =~ /1.9/
+    gem 'will_paginate', '3.0.pre2'
+  else
+    gem 'will_paginate'
+  end
+
   bundle :install
 end
 
