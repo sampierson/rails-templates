@@ -1,0 +1,4 @@
+<% common_args = "--strict -r features/support/env.rb -r features/step_definitions " %>
+plain:    <%= common_args %> --format pretty --color -r features/support/environments/plain.rb    features/plain
+selenium: <%= common_args %> --format pretty --color -r features/support/environments/selenium.rb features/plain features/selenium
+ci: <%= common_args %> --format html --out cucumber_results.html -r features/support/envs/selenium.rb features/plain features/selenium

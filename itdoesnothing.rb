@@ -12,7 +12,7 @@ TEMPLATES = [
   'debug',
   'rspec2',
   (RUBY_VERSION =~ /1.9/ ? 'cover_me' : 'rcov'),  # Test coverage measurement
-  'cucumber+capybara',                            # Integration test framework: cucumber-capybara cucumber+webrat
+  'cucumber+webrat',                              # Integration test framework: cucumber-capybara cucumber+webrat
   'compass+html5',                                # Templating/layout: haml compass+blueprint compass+html5
   'style',                                        # Customize layout
   'home_controller',                              # A simple controller around which we can wrap authentication

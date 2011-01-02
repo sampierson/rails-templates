@@ -37,7 +37,7 @@ git_commit '[Devise] Changes suggested by devise:install' do
   end
 end
 
-git_commit "rails generate devise User\n\nand delete the 'pending' test from the User spec file" do
+git_commit "[Devise] rails generate devise User\n\nand delete the 'pending' test from the User spec file" do
   generate :'devise', 'User'
   replace_file  'spec/models/user_spec.rb'
 end
@@ -139,5 +139,33 @@ git_commit '[Devise] HAMLize some Devise templates' do
   }.each do |file|
     git :rm => "app/views/devise/#{file}.html.erb"
     install_file "app/views/devise/#{file}.html.haml"
+  end
+end
+
+git_commit '[Devise] Cucumber test for authentication' do
+  features_path = File.exist?('features/plain') ? 'features/plain' : 'features'
+  install_file "#{features_path}/authentication.feature", :source => 'features/authentication.feature'
+
+  insert_into_file 'features/step_definitions/web_steps.rb',
+                   :after => 'Then /^(?:|I )should be on (.+)$/ do |page_name|' do
+    <<-EOF
+  simulate do
+    if response.redirect?
+      visit response.headers['Location']
+    end
+  end
+    EOF
+  end
+
+  install_file 'features/step_definitions/devise_steps.rb'
+  insert_into_file 'features/support/paths.rb', :before => "    # Add more mappings here." do
+    <<-EOF
+  when /the sign in page/; new_user_session_path
+
+  when /the confirmation link for user "([^"]+)"/
+    user = User.find_by_email($1)
+    user_confirmation_url(user, :confirmation_token => user.confirmation_token)
+
+    EOF
   end
 end
