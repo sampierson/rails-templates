@@ -23,7 +23,8 @@ describe("<%= app_const_base %>.AdminUsersIndexPage", function() {
       <%= app_const_base %>.AdminUsersIndexPage.addBehaviorToUsersTableHeadings();
       var $roleLink = $('#users th.role a');
       $roleLink.click();
-      expect($.getScript).toHaveBeenCalledWith('http://localhost:8888/admin/users?direction=asc&sort=role');
+      expect($.getScript).toHaveBeenCalled();
+      expect($.getScript.mostRecentCall.args[0]).toMatch('/admin/users\\?direction=asc&sort=role$');
     });
   });
 
@@ -35,7 +36,7 @@ describe("<%= app_const_base %>.AdminUsersIndexPage", function() {
       $('input#search').val('fake-search');
       $form.submit();
       expect($.get).toHaveBeenCalled();
-      expect($.get.mostRecentCall.args[0]).toEqual('http://localhost:8888/admin/users');
+      expect($.get.mostRecentCall.args[0]).toMatch('/admin/users$');
       expect($.get.mostRecentCall.args[1]).toMatch('search=fake-search');
     });
   });
