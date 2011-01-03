@@ -11,7 +11,7 @@ git_commit "[Jasmine] jasmine init" do
 end
 
 git_commit "[Jasmine] Configure jasmine for our JavaScripts" do
-  replace_file 'spec/javascripts/support/jasmine.yml'
+  replace_file 'spec/javascripts/support/jasmine.yml', :method => :template
 end
 
 git_commit "[Jasmine] Disable jasmine rake tasks for production" do

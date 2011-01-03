@@ -15,8 +15,8 @@ src_files:
   - public/javascripts/jquery-1.4.4.min.js
   - public/javascripts/rails.js
   - public/javascripts/plugins.js
-  - public/javascripts/idn/*.js
-  - public/javascripts/idn/pages/**/*.js
+  - public/javascripts/<%= app_const_base %>/*.js
+  - public/javascripts/<%= app_const_base %>/pages/**/*.js
   - public/javascripts/profiling/yahoo-profiling.min.js
   - public/javascripts/profiling/config.js
 
