@@ -63,8 +63,11 @@ git_commit '[Devise] Turn on :confirmable and :lockable' do
             '# add_index :users, :confirmation_token,   :unique => true',
             'add_index :users, :confirmation_token,   :unique => true'
   add_to_locale({
-    'signed_up' => "You have signed up successfully. If enabled, a confirmation was sent to your e-mail.",
-    'signed_up' => "You have registered successfully and have been sent a confirmation email.  To complete the sign-up progess, please click on the link contained in that email."
+    'devise' => {
+      'registrations' => {
+        'signed_up' => "You have registered successfully and have been sent a confirmation email.  To complete the sign-up progess, please click on the link contained in that email."        
+      }
+    }
   }, 'config/locales/devise.en.yml')
 end
 
@@ -104,21 +107,23 @@ header {
   end
 
   add_to_locale({
-    'sessions' => {
-      'login'        => "Login",
-      'sign_in'      => "Sign in",
-      'signed_in'    => "Signed in successfully.",
-      'sign_out'     => "Sign out",
-      'signed_in_as' => "Signed in as %{user}.",
-      'signed_out'   => "Signed out successfully."
-    },
-    'passwords' => {
-      'forgot' => "Forgot your password?"
-    },
-    'registrations' => {
-      'already_question' => "Already have an account?",
-      'dont_have_an_account' => "Don't have an account?",
-      'sign_up' => "Sign up"
+    'devise' => {
+      'sessions' => {
+        'login'        => "Login",
+        'sign_in'      => "Sign in",
+        'signed_in'    => "Signed in successfully.",
+        'sign_out'     => "Sign out",
+        'signed_in_as' => "Signed in as %{user}.",
+        'signed_out'   => "Signed out successfully."
+      },
+      'passwords' => {
+        'forgot' => "Forgot your password?"
+      },
+      'registrations' => {
+        'already_question' => "Already have an account?",
+        'dont_have_an_account' => "Don't have an account?",
+        'sign_up' => "Sign up"
+      }
     }
   }, 'config/locales/devise.en.yml')
 end

@@ -34,3 +34,11 @@ git_commit "[Jasmine] Add JavaScript fixture builder support" do
   gsub_file javascripts_partial, /^/, '  '
   prepend_file javascripts_partial, "#load-javascripts\n"
 end
+
+git_commit "[Jasmine] Add Jasmine tests to CI build" do
+  insert_into_file 'lib/tasks/ci.rake', :before => /^end/ do
+    <<-EOF
+  Rake::Task['jasmine:ci'].invoke
+    EOF
+  end
+end
