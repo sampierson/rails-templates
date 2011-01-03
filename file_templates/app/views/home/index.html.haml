@@ -3,8 +3,8 @@
 %pre{ :style => 'width: 800px; margin: auto;' }
   rails new application_name --skip-test-unit --skip-prototype \
   &nbsp;&nbsp;--template=https://github.com/sampierson/rails-templates/raw/master/itdoesnothing.rb
-  cd itdoesnothing
-  heroku create --stack bamboo-mri-1.9.2 application_name
+  cd application_name
+  heroku create application_name
   heroku config:add BUNDLE_WITHOUT="development:test"
   git push heroku master
   heroku rake db:migrate
@@ -24,8 +24,10 @@
         = link_to 'RSpec 2', 'http://relishapp.com/rspec'
         for Ruby unit and functional tests
       %li
+        = link_to 'RCov', 'http://eigenclass.org/hiki/rcov'
+        (Ruby 1.8) or
         = link_to 'Cover Me', 'https://github.com/markbates/cover_me'
-        for code coverage
+        (Ruby 1.9) for code coverage
       %li
         = link_to 'Cucumber', 'http://cukes.info/'
         \/ Capybara for integration tests
