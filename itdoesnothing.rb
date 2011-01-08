@@ -22,6 +22,8 @@ TEMPLATES = [
   'i18n',
   'jasmine',
   'page_specific_js_framework',
+  'simple-navigation',
+  'admin_base',
   'admin_users',
   'herokuize',
   'spork'

@@ -19,6 +19,7 @@ git_commit "Add some minimal style to shape the layout" do
     EOF
   end
 
+  replace_file 'app/stylesheets/partials/_base.scss', :flavor => 'html5'
   replace_file 'app/stylesheets/partials/_page.scss', :flavor => 'html5'
 
   install_file 'app/stylesheets/partials/_flash.scss'

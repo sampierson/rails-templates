@@ -113,7 +113,7 @@ header {
         'sign_in'      => "Sign in",
         'signed_in'    => "Signed in successfully.",
         'sign_out'     => "Sign out",
-        'signed_in_as' => "Signed in as %{user}.",
+        'signed_in_as' => "Signed in as %{user}",
         'signed_out'   => "Signed out successfully."
       },
       'passwords' => {

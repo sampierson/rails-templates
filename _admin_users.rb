@@ -62,10 +62,15 @@ git_commit "[AdminUsers] Create Admin::UsersController" do
   insert_into_file 'config/routes.rb', :before => "\nend" do
     <<-EOF
 
-
   namespace :admin do
     resources :users
   end
+    EOF
+  end
+
+  insert_into_file 'config/navigation.rb', :before => "    end # :admin\n" do
+    <<-EOF
+      admin.item :users, I18n.t('navigation.admin.users'), admin_users_path
     EOF
   end
 

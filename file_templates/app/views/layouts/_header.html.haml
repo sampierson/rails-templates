@@ -1,6 +1,7 @@
 #user_nav
   - if user_signed_in?
     = t('devise.sessions.signed_in_as', :user => current_user.email)
+    %br
     = link_to t('devise.sessions.sign_out'), destroy_user_session_path
   - else
     = link_to t('devise.registrations.sign_up'), new_user_registration_path

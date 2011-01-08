@@ -64,25 +64,37 @@ body {
 
 #container {
   min-height: 100%;
+  padding: 0 30px;
+  @include linear-gradient(color-stops($header-bg-color, $footer-bg-color));
+
 }
 
 header {
-  height: 40px;
-  padding: 20px;
-
-  background-color: #E0E0E0;
+  height: 130px;
+  margin-bottom: 30px;
+  color: $header-font-color;
+  background-color: $header-bg-color;
 
   #logo {
+    padding-top: 15px;
     font-weight: bold;
     font-size: 2.5em;
     a {
       text-decoration: none;
-      color: $font-color;
+      color: $header-font-color;
     }
   }
 
   #user_nav {
     float: right;
+    height: 40px;
+    margin-top: 30px;
+    padding-right: 20px;
+    text-align: right;
+    color: white;
+    a {
+      color: $light-blue;
+    }
   }
 }
 
@@ -92,7 +104,115 @@ $footer-padding: 5px;
 $total-footer-height: $footer-height + $footer-padding * 2;
 
 #main {
+  min-height: 400px;
+  background-color: $main-bg-color;
   padding: $main-padding $main-padding ($main-padding + $total-footer-height) $main-padding;
+}
+
+nav {
+  margin-top: 10px;
+  width: 100%;
+
+  ul {
+    float: left;
+    position: relative; /* So subtabs can position relative to this */
+    height: 30px;
+    margin: 0;
+    width: 100%;
+    background-color: $header-bg-color;
+    @include border-right-radius(5px);
+  }
+
+  li {
+    display: block;
+    float: left;
+    height: 30px;
+    margin-right: 5px;
+
+    @include border-top-radius(5px);
+    background-color: $tab-inactive-color;
+
+    &.selected {
+      background-color: $tab-active-color;
+      &:hover {
+        background-color: $tab-active-color;
+      }
+    }
+
+    &:hover {
+      background-color: $tab-hover-color;
+    }
+
+    a {
+      padding: 10px 20px;
+      line-height: 30px;
+      text-decoration: none;
+      &:hover {
+        color: $link-color;
+      }
+    }
+  }
+
+  /*
+   * The selected tab and its subtabs are styled differently, including during hover.
+   *
+   */
+
+  li > ul {
+    /* Line all subtabs up under top level tabs */
+    position: absolute;
+    top: 30px;
+    left: 0;
+     /* Hide all subtabs by default */
+    display: none;
+  }
+
+  /*
+   * Style for hovering over inactive tabs and subtabs:
+   *
+   *   - convert tab and entire subtab bar to hover color
+   *   - hovering over subtabs changes it to active color
+   */
+
+  li:hover ul {
+    /* When hovering over any top-level tab, show it's subtabs, covering any other displayed subtabs */
+    display: block;
+    z-index: 6000;
+    background-color: $tab-hover-color;
+  }
+
+  li > ul > li {
+    /* Don't round subtab corners */
+    @include border-radius(0);
+    margin: 0;
+    background-color: $tab-hover-color;
+
+    &:hover {
+      background-color: $tab-active-color;
+    }
+  }
+
+  /*
+   * Style for active tabs and subtabs:
+   *
+   *   - always show subtabs for currently selected top level tab, colored as active
+   *   - hovering over subtabs changes them to hover color
+   */
+
+  li.selected ul {
+    display: block;
+    background-color: $tab-active-color;
+  }
+
+  li.selected > ul > li {
+    background-color: $tab-active-color;
+    &.selected {
+      font-weight: bold;
+    }
+    &:hover {
+      background-color: $tab-hover-color;
+    }
+  }
 }
 
 footer {
@@ -100,7 +220,7 @@ footer {
   padding: $footer-padding;
   margin-top: -1 * $total-footer-height;
 
-  background-color: #E0E0E0;
+  background-color: $footer-bg-color;
 
   text-align: center;
 }
