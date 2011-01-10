@@ -30,4 +30,7 @@ git_commit "Add some minimal style to shape the layout" do
 
   install_file 'app/stylesheets/partials/_pages.scss'
   append_file 'app/stylesheets/style.scss', "@import 'partials/pages';\n"
+  gsub_file 'app/stylesheets/partials/_example.sass',
+            'html { @include force-scrollbar; }',
+            '// html { @include force-scrollbar; }'
 end

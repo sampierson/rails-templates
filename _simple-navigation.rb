@@ -10,7 +10,7 @@ git_commit "[Simple-navigation] Setup navigation tabs" do
       'administration' => 'Administration',
       'admin' => {
         'settings' => 'Settings',
-        'users' => 'Manage users'
+        'users' => 'Manage Users'
       },
       'home' => 'Home',
       'preferences' => 'Preferences',
