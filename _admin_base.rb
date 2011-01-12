@@ -12,8 +12,8 @@ git_commit "[AdminBase] Create admin#home page" do
   insert_into_file 'config/navigation.rb', :before => "  end\nend\n" do
     <<-EOF
 
-    primary.item :admin, I18n.t('navigation.administration'), admin_path, :if => Proc.new { user_signed_in? && current_user.admin? } do |admin|
-      admin.item :home, I18n.t('navigation.home'), admin_path
+    primary.item :tab_admin, I18n.t('navigation.administration'), admin_path, :if => Proc.new { user_signed_in? && current_user.admin? } do |admin|
+      admin.item :tab_admin_home, I18n.t('navigation.home'), admin_path
     end # :admin
     EOF
   end

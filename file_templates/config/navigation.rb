@@ -62,7 +62,7 @@ SimpleNavigation::Configuration.run do |navigation|
     # You can turn off auto highlighting for a specific level
     # primary.auto_highlight = false
 
-    primary.item :home, I18n.t('navigation.home'), root_path do |home|
+    primary.item :tab_home, I18n.t('navigation.home'), root_path do |home|
       # Include empty block to get simple-navigtion to generate empty <ul>s
     end # :home
   end
