@@ -26,7 +26,8 @@ TEMPLATES = [
   'admin_base',
   'admin_users',
   'herokuize',
-  'spork'
+  'spork',
+  'capistrano'
 ].each do |template|
   apply "#{TEMPLATES_REPOSITORY}/_#{template}.rb"
 end
@@ -34,3 +35,5 @@ end
 git_commit "Change logo to itdoesnothing" do
   gsub_file 'app/views/layouts/_header.html.haml', 'Logo', "It Does Nothing!"
 end
+
+run_and_commit "bundle package"
