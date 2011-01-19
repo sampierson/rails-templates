@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Admin::UsersController do
-  include Devise::TestHelpers
   fixtures :users
 
   context "when not logged in" do

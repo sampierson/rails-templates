@@ -15,6 +15,9 @@ end
 git_commit "[AdminUsers] Create Admin::UsersController" do
   install_file 'app/controllers/admin/users_controller.rb'
   install_file 'spec/controllers/admin/users_controller_spec.rb'
+  insert_into_file 'spec/spec_helper.rb', :before => "\nend" do
+    "\n  config.include Devise::TestHelpers, :type => :controller"
+  end  
   install_file 'app/views/admin/users/index.html.haml'
   install_file 'app/views/admin/users/_users.html.haml'
   install_file 'app/views/admin/users/index.js.erb'

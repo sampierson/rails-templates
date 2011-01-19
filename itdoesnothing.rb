@@ -25,6 +25,7 @@ TEMPLATES = [
   'simple-navigation',
   'admin_base',
   'admin_users',
+  'admin_settings',
   'herokuize',
   'spork',
   'capistrano'

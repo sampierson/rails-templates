@@ -1,13 +1,15 @@
 unconfirmed_user:
-  email: uncofirmed@example.com
+  email: unconfirmed@example.com
   created_at: 2010-09-08 07:06:05
   role: user
 
 confirmed_user:
-  email: cofirmed@example.com
+  email: confirmed@example.com
   created_at: 2010-09-08 07:06:05
   confirmed_at: 2010-09-08 07:06:06
   role: user
+  encrypted_password: "$2a$10$RIiFLG/lHX3DJdlW8VYRcu7klELEu4dhyETuYej0q9biezXOr513G" # "password"
+  password_salt: "$2a$10$RIiFLG/lHX3DJdlW8VYRcu"
 
 locked_user:
   email: locked@example.com
