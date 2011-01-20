@@ -168,4 +168,8 @@ git_commit '[Devise] Cucumber test for authentication' do
 
     EOF
   end
+
+  insert_into_file 'config/environments/production.rb', :before => "\nend" do
+    "\n\n  config.action_mailer.smtp_settings = YAML.load_file(Rails.root.join('config', 'smtp_settings.yml'))"
+  end
 end
