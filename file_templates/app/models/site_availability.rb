@@ -1,10 +1,10 @@
 class SiteAvailability < EnumerateIt::Base
    associate_values(
      :down                => 0,
-     :admins_only         => [20,  I18n.t('site_availability.admins_only')],
-     :prevent_user_logins => [40,  I18n.t('site_availability.prevent_user_logins')],
-     :prevent_new_signups => [80,  I18n.t('site_availability.prevent_new_signups')],
-     :fully_operational   => [100, I18n.t('site_availability.fully_operational')]
+     :admins_only         => [20,  :admins_only],
+     :prevent_user_logins => [40,  :prevent_user_logins],
+     :prevent_new_signups => [80,  :prevent_new_signups],
+     :fully_operational   => [100, :fully_operational]
    )
 
   def self.for_select

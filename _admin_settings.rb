@@ -21,11 +21,13 @@ git_commit '[AdminSettings] Add AppConfiguration with site_availability' do
   install_file 'app/models/app_configuration.rb'
   install_file 'app/models/site_availability.rb'
   add_to_locale({
-    'site_availability' => {
-      'admins_only'         => 'Log out everyone but admins',
-      'prevent_user_logins' => 'Prevent new user logins',
-      'prevent_new_signups' => 'Allow logins but prevent new signups',
-      'fully_operational'   => 'Fully operational'
+    'enumerations' => {
+      'site_availability' => {
+        'admins_only'         => 'Log out everyone but admins',
+        'prevent_user_logins' => 'Prevent new user logins',
+        'prevent_new_signups' => 'Allow logins but prevent new signups',
+        'fully_operational'   => 'Fully operational'
+      }
     }
   })
 end
