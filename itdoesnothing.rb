@@ -6,7 +6,7 @@
 
 TEMPLATES_REPOSITORY = ENV['TEMPLATES_REPOSITORY'] || 'https://github.com/sampierson/rails-templates/raw/master'
 
-TEMPLATES = [
+templates = [
   'utils',
   'base+git',
   'debug',
@@ -26,10 +26,26 @@ TEMPLATES = [
   'admin_base',
   'admin_users',
   'admin_settings',
-  'herokuize',
-  'spork',
-  'capistrano'
-].each do |template|
+  'spork'
+]
+
+deploy_strategy = ask "Deploy to Heroku [h], using Capistrano [c] or neither [n] ? [h]: "
+deploy_strategy = 'h' if deploy_strategy.blank?
+case deploy_strategy.first.downcase
+when 'h':
+  ENV['DEPLOY_STRATEGY'] = 'heroku'
+  templates << 'herokuize'
+when 'c':
+  ENV['DEPLOY_STRATEGY'] = 'capistrano'
+  templates << 'capistrano'
+  default_deploy_host = "#{app_name}.com"
+  deploy_host = ask "deploy_to_hostname [#{default_deploy_host}]: "
+  ENV['CAPISTRANO_DEPLOY_HOST'] = deploy_host.blank? ? default_deploy_host : deploy_host
+when 'n':
+  ENV['DEPLOY_STRATEGY'] = 'none'
+end
+
+templates.each do |template|
   apply "#{TEMPLATES_REPOSITORY}/_#{template}.rb"
 end
 

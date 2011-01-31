@@ -10,7 +10,7 @@ end
 git_commit '[Devise] Configure devise initializer' do
   gsub_file 'config/initializers/devise.rb',
             'config.mailer_sender = "please-change-me@config-initializers-devise.com"',
-            'config.mailer_sender = "no-reply@itdoesnothing.com"'
+            "config.mailer_sender = \"no-reply@#{app_name}.com\""
   gsub_file 'config/initializers/devise.rb',
             '# config.confirm_within = 2.days',
             'config.confirm_within = 0'
@@ -26,13 +26,23 @@ git_commit '[Devise] Configure devise initializer' do
 end
 
 git_commit '[Devise] Changes suggested by devise:install' do
-  [
-    { :environment => :development, :email_from_host => 'localhost:3000' },
-    { :environment => :test,        :email_from_host => 'localhost:3000' },
-    { :environment => :production,  :email_from_host => 'itdoesnothing.com' }
-  ].each do |info|
-    inject_into_file "config/environments/#{info[:environment]}.rb", :before => /^end\n/ do
-      "\n  config.action_mailer.default_url_options = { :host => '#{info[:email_from_host]}' }\n"
+  # We're going to setup action_mailer.default_url_options
+  inject_into_file "config/environments/development.rb", :before => /^end\n/ do
+    "\n  config.action_mailer.default_url_options = { :host => 'localhost:3000' }\n"
+  end
+  inject_into_file "config/environments/test.rb", :before => /^end\n/ do
+    "\n  config.action_mailer.default_url_options = { :host => 'example.com:3000' }\n"
+  end
+  if ENV['DEPLOY_STRATEGY'] == 'heroku'
+    # However there is a Heroku 'feature' we have to work around:
+    #   If the string 'action_mailer' appears in config/environments/production.rb, Heroku setup of sendgrid fails
+    # Because of this, we will put the production value in application.rb
+    inject_into_file "config/application.rb", :before => /^  end\nend\n/ do
+      "\n    config.action_mailer.default_url_options = { :host => '#{app_name}.com' }\n"
+    end
+  else
+    inject_into_file "config/environments/production.rb", :before => /^end\n/ do
+      "\n  config.action_mailer.default_url_options = { :host => '#{app_name}.com' }\n"
     end
   end
 end
@@ -167,9 +177,5 @@ git_commit '[Devise] Cucumber test for authentication' do
     user_confirmation_url(user, :confirmation_token => user.confirmation_token)
 
     EOF
-  end
-
-  insert_into_file 'config/environments/production.rb', :before => "\nend" do
-    "\n\n  config.action_mailer.smtp_settings = YAML.load_file(Rails.root.join('config', 'smtp_settings.yml'))"
   end
 end

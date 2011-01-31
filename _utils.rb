@@ -2,7 +2,7 @@
 def git_commit(message, &block)
   yield if block_given?
   git :add => "."
-  git :commit => "--quiet -m '#{message}'"
+  git :commit => "--quiet --message '#{message}'"
 end
 
 def run_and_commit(command, options={})

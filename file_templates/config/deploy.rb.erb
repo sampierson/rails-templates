@@ -14,9 +14,9 @@ set :deploy_via, :remote_cache
 #set :rails_env, 'production'
 #set :deploy_to, "/home/dhusername/#{application}"
 
-role :web, "<%= app_name %>.com"                   # Your HTTP server, Apache/etc
-role :app, "<%= app_name %>.com"                   # This may be the same as your `Web` server
-role :db,  "<%= app_name %>.com", :primary => true # This is where Rails migrations will run
+role :web, "<%= ENV['CAPISTRANO_DEPLOY_HOST'] %>"                   # Your HTTP server, Apache/etc
+role :app, "<%= ENV['CAPISTRANO_DEPLOY_HOST'] %>"                   # This may be the same as your `Web` server
+role :db,  "<%= ENV['CAPISTRANO_DEPLOY_HOST'] %>", :primary => true # This is where Rails migrations will run
 #role :db,  "your slave db-server here"
 
 after "deploy:update_code" do
