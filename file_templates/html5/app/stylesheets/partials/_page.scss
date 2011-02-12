@@ -91,9 +91,19 @@ header {
   #user_nav {
     float: right;
     height: 40px;
-    margin-top: 30px;
-    padding-right: 20px;
-    text-align: right;
+    width: 250px;
+    margin: 10px 10px 0 0;
+    padding: 10px;
+    background-color: $tab-hover-color;
+    #top_row, #bottom_row {
+      height: 24px;
+    }
+    .left {
+      float: left;
+    }
+    .right {
+      float: right;
+    }
   }
 }
 

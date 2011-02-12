@@ -81,6 +81,10 @@ git_commit '[Devise] Turn on :confirmable and :lockable' do
   }, 'config/locales/devise.en.yml')
 end
 
+git_commit '[Devise] Add shared examples for controller authentication specs' do
+  install_file 'spec/shared_examples/authentication.rb'
+end
+
 git_commit '[Devise] Add devise login/registration links to layout' do
 
   if File.exist? 'app/views/layouts/_header.html.haml' # Assume we are using Compass HTML5-Boilerplate

@@ -1,11 +1,19 @@
 #user_nav
-  - if user_signed_in?
-    = t('devise.sessions.signed_in_as', :user => current_user.email)
-    %br
-    = link_to t('devise.sessions.sign_out'), destroy_user_session_path
-  - else
-    = link_to t('devise.registrations.sign_up'), new_user_registration_path
-    or
-    = link_to t('devise.sessions.sign_in'), new_user_session_path
+  #top_row
+    - if user_signed_in?
+      = t('devise.sessions.signed_in_as', :user => current_user.email)
+  #botom_row
+    - if user_signed_in?
+      .left
+        = link_to t('navigation.preferences'), edit_preferences_path
+      .right
+        = link_to t('devise.sessions.sign_out'), destroy_user_session_path
+    - else
+      .left
+        = link_to t('devise.registrations.sign_up'), new_user_registration_path
+        or
+        = link_to t('devise.sessions.sign_in'), new_user_session_path
 #logo
-  = link_to "Logo", root_path
+  = link_to "It Does Nothing!", root_path
+%nav
+  = render_navigation :expand_all => true

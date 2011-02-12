@@ -1,0 +1,26 @@
+%h1 Edit Preferences
+%h3 Change Password
+= form_for current_user, :url => change_password_preferences_path, :method => :put do |f|
+  = if current_user.errors.any?
+    #errorExplanation
+      %h2= pluralize(current_user.errors.count, "error")
+      prohibited this record from being saved:
+      %ul
+        - current_user.errors.full_messages.each do |msg|
+          %li= msg
+  %table
+    %tbody
+      %tr
+        %td= label_tag :old_password, t('field.current_password')
+        %td= password_field_tag :old_password
+      %tr
+        %td= f.label :password, t('field.new_password')
+        %td= f.password_field :password
+        %td.field_error= f.object.errors[:password]
+      %tr
+        %td= f.label :password_confirmation, t('field.new_password_confirmation')
+        %td= f.password_field :password_confirmation
+        %td.field_error= f.object.errors[:password_confirmation]
+      %tr
+        %td
+        %td= f.submit t('crud.save')

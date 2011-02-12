@@ -26,6 +26,7 @@ templates = [
   'admin_base',
   'admin_users',
   'admin_settings',
+  'user_preferences',
   'spork'
 ]
 
