@@ -32,17 +32,17 @@ templates = [
 
 deploy_strategy = ask "Deploy to Heroku [h], using Capistrano [c] or neither [n] ? [h]: "
 deploy_strategy = 'h' if deploy_strategy.blank?
-case deploy_strategy.first.downcase
-when 'h':
+case deploy_strategy[0,1].downcase
+when 'h'
   ENV['DEPLOY_STRATEGY'] = 'heroku'
   templates << 'herokuize'
-when 'c':
+when 'c'
   ENV['DEPLOY_STRATEGY'] = 'capistrano'
   templates << 'capistrano'
   default_deploy_host = "#{app_name}.com"
   deploy_host = ask "deploy_to_hostname [#{default_deploy_host}]: "
   ENV['CAPISTRANO_DEPLOY_HOST'] = deploy_host.blank? ? default_deploy_host : deploy_host
-when 'n':
+when 'n'
   ENV['DEPLOY_STRATEGY'] = 'none'
 end
 
