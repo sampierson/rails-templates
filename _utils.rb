@@ -13,7 +13,7 @@ def run_and_commit(command, options={})
 end
 
 def bundle(command, options = {})
-  default_options = { :quiet => true, :local => true }
+  default_options = { :quiet => true, :local => false }
   actual_options = default_options.merge(options)
   options = actual_options.inject("") { |memo, kv| memo << " --#{kv.first}" if kv.last; memo }
   run "bundle #{command} #{options}"
