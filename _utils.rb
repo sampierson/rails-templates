@@ -29,7 +29,11 @@ end
 # :flavor => Subdir of file_templates to look for source file of same name as dest file (cannot be used with :source)
 #
 def install_file(path, options = {})
-  source_path = "#{TEMPLATES_REPOSITORY}/file_templates/" + (options[:source] || "#{options[:flavor]}/#{path}")
+  source_path = "#{TEMPLATES_REPOSITORY}/file_templates/" +
+    if options[:source] ; options[:source]
+    elsif options[:flavor] ; "#{options[:flavor]}/#{path}"
+    else path
+    end
   method = options.delete(:method) || (TEMPLATES_REPOSITORY =~ /^https?:/ ? :get : :copy_file)
   send method, source_path, path
 end
