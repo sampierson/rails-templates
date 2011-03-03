@@ -1,9 +1,8 @@
+# Copied from devise-1.1.7
 class Devise::RegistrationsController < ApplicationController
   prepend_before_filter :require_no_authentication, :only => [ :new, :create ]
   prepend_before_filter :authenticate_scope!, :only => [:edit, :update, :destroy]
   include Devise::Controllers::InternalHelpers
-
-  before_filter :conditionally_disable_registration
 
   # GET /resource/sign_up
   def new
@@ -11,7 +10,7 @@ class Devise::RegistrationsController < ApplicationController
     render_with_scope :new
   end
 
-  # POST /resource/sign_up
+  # POST /resource
   def create
     build_resource
 
@@ -19,6 +18,7 @@ class Devise::RegistrationsController < ApplicationController
       set_flash_message :notice, :signed_up
       sign_in_and_redirect(resource_name, resource)
     else
+      set_flash_message :alert, :problem_signing_up
       clean_up_passwords(resource)
       render_with_scope :new
     end
@@ -56,13 +56,4 @@ class Devise::RegistrationsController < ApplicationController
       send(:"authenticate_#{resource_name}!")
       self.resource = resource_class.find(send(:"current_#{resource_name}").id)
     end
-
-  private
-
-  def conditionally_disable_registration
-    if AppConfiguration.site_availability <= SiteAvailability::PREVENT_NEW_SIGNUPS
-      flash[:alert] = t('site_availability.sorry_no_signups')
-      redirect_to root_path
-    end
-  end
 end

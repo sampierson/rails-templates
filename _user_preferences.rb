@@ -12,18 +12,20 @@ git_commit '[UserPreferences] Add user preferences page' do
   end
     EOF
   end
-end
 
-add_to_locale({
-  'field' => {
-    'current_password' => "Current password",
-    'new_password' => "New password",
-    'new_password_confirmation' => "Confirm new password"
-  },
-  'preferences' => {
-    'bad_old_password' => "Your old password was not correct, password was not changed.",
-    'must_supply_old_and_new_passwords' => "You must fill in the old and new passwords to change your password",
-    'password_update_problem' => "There was a problem changing your password",
-    'password_updated' => "Your password has been changed"
-  }
-}, 'config/locales/en.yml')
+  add_to_locale({
+    'field' => {
+      'current_password' => "Current password",
+      'new_password' => "New password",
+      'new_password_confirmation' => "Confirm new password"
+    },
+    'preferences' => {
+      'change_password' => "Change Password",
+      'edit' => "Edit Preferences",
+      'bad_old_password' => "Your old password was not correct, password was not changed.",
+      'must_supply_old_and_new_passwords' => "You must fill in the old and new passwords to change your password",
+      'password_update_problem' => "There was a problem changing your password",
+      'password_updated' => "Your password has been changed"
+    }
+  }, 'config/locales/en.yml')
+end

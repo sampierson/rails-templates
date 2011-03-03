@@ -50,7 +50,23 @@ git_commit '[AdminSettings] Add site_availability logic' do
     EOF
   end
 
-  install_file 'app/controllers/devise/registrations_controller.rb'
+  insert_into_file 'app/controllers/devise/registrations_controller.rb', :after => "  include Devise::Controllers::InternalHelpers\n\n" do
+    "  before_filter :conditionally_disable_registration\n\n"
+  end
+  insert_into_file 'app/controllers/devise/registrations_controller.rb', :before => "\nend" do
+    <<-EOF
+
+  private
+
+  def conditionally_disable_registration
+    if AppConfiguration.site_availability <= SiteAvailability::PREVENT_NEW_SIGNUPS
+      flash[:alert] = t('site_availability.sorry_no_signups')
+      redirect_to root_path
+    end
+  end
+    EOF
+  end
+  
   install_file 'app/controllers/devise/sessions_controller.rb'
   install_file 'spec/controllers/application_controller_spec.rb'
   install_file 'spec/controllers/devise/registrations_controller_spec.rb'

@@ -146,13 +146,35 @@ git_commit '[Devise] rails generate devise:views' do
   generate :'devise:views'
 end
 
-git_commit '[Devise] HAMLize some Devise templates' do
+git_commit '[Devise] HAMLize Devise template(s) and clean up error messaging' do
   %w{
     sessions/new
     registrations/new
   }.each do |file|
     git :rm => "app/views/devise/#{file}.html.erb"
     install_file "app/views/devise/#{file}.html.haml"
+  end
+end
+
+git_commit '[Devise] clean up registraiton error messaging' do
+
+  install_file 'app/controllers/devise/registrations_controller.rb'
+
+  add_to_locale({
+    'devise' => {
+      'registrations' => {
+        'problem_signing_up' => "There was a problem signing you up."
+      }
+    }
+  }, 'config/locales/devise.en.yml')
+
+  inject_into_file 'app/helpers/application_helper.rb', :before => "\nend" do
+    <<-EOF
+
+  def errors_helper(model, attr)
+    model.errors[attr].join("<br/>").html_safe
+  end
+    EOF
   end
 end
 
