@@ -19,15 +19,8 @@ describe Devise::SessionsController do
       end
 
       it "should log you in" do
-        pending "Enable this again when Rails > 3.0.3?"
-        # Using Rails 3.0.3
-        # There is a problem with the many locale= calls scattered around rails, causing a deadly embrace
-        # between these two fellas and resulting in a "stack level too deep":
-        #   actionpack-3.0.3/lib/action_view/lookup_context.rb:175:in `locale='
-        #   actionpack-3.0.3/lib/abstract_controller/rendering.rb:28:in `locale='
-
-        post :create, :email => @user.email, :password => 'password'
-        response.should be_success
+        post :create, :user => {:email => @user.email, :password => 'password'}
+        flash[:notice].should =~ /signed in successfully/i
       end
     end
 
@@ -37,16 +30,9 @@ describe Devise::SessionsController do
       end
 
       it "should redirect back to the homepage with a flash message" do
-        pending "Enable this again when Rails > 3.0.3?"
-        # Using Rails 3.0.3
-        # There is a problem with the many locale= calls scattered around rails, causing a deadly embrace
-        # between these two fellas and resulting in a "stack level too deep":
-        #   actionpack-3.0.3/lib/action_view/lookup_context.rb:175:in `locale='
-        #   actionpack-3.0.3/lib/abstract_controller/rendering.rb:28:in `locale='
-
-        post :create, :email => @user.email, :password => 'password'
+        post :create, :user => {:email => @user.email, :password => 'password'}
         response.should be_redirect
-        flash[:alert].should =~ /may not sign-up/
+        flash[:alert].should =~ /undergoing maintenance/
       end
     end
   end
