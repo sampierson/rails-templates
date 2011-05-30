@@ -9,6 +9,7 @@ TEMPLATES_REPOSITORY = ENV['TEMPLATES_REPOSITORY'] || 'https://github.com/sampie
 templates = [
   'utils',
   'base+git',
+  'db',
   'debug',
   'rspec2',
   (RUBY_VERSION =~ /1.9/ ? 'cover_me' : 'rcov'),  # Test coverage measurement
